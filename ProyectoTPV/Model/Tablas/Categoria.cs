@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoTPV.Model
 {
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class Categoria : PropertyValidateModel
     {
         public Categoria()

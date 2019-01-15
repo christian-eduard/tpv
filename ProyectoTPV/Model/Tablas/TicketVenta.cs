@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoTPV.Model
 {
-    [PropertyChanged.ImplementPropertyChanged]
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class TicketVenta : PropertyValidateModel
     {
         public TicketVenta()

@@ -76,10 +76,10 @@ namespace ProyectoTPV
                 MainContentControl = { Background = Brushes.WhiteSmoke },
                 TitleBackgroundPanel = { Background = Brushes.Brown },
 
-                BorderBrush = Brushes.BlueViolet
+            //    BorderBrush = Brushes.BlueViolet
             };
 
-            msg.Show();
+            // msg.Show();
 
             if (msg.Result.Equals(MessageBoxResult.OK))
             {

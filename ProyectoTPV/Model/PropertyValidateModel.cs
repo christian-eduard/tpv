@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoTPV.Model
 {
-    [PropertyChanged.ImplementPropertyChanged]
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
     public abstract class PropertyValidateModel : IDataErrorInfo
     {
         // check for general model error
