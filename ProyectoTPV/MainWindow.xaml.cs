@@ -2,25 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Resources;
-using System.Windows.Shapes;
 using System.IO;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using BespokeFusion;
+using AmRoMessageDialog;
 
 namespace ProyectoTPV
 {
@@ -67,21 +59,25 @@ namespace ProyectoTPV
         #region Custom MessageBox
         public bool MsgPregunta(string Mensaje, string Titulo)
         {
-            var msg = new CustomMaterialMessageBox
-            {
-                TxtMessage = { Text = Mensaje, Foreground = Brushes.Black },
-                TxtTitle = { Text = Titulo, Foreground = Brushes.White },
-                BtnOk = { Content = "Si" },
-                BtnCancel = { Content = "No" },
-                MainContentControl = { Background = Brushes.WhiteSmoke },
-                TitleBackgroundPanel = { Background = Brushes.Brown },
 
-            //    BorderBrush = Brushes.BlueViolet
+            
+            var messageBox = new AmRoMessageBox
+            {
+                Background = "#333333",
+                TextColor = "#ffffff",
+                IconColor = "#3399ff",
+                RippleEffectColor = "#000000",
+                ClickEffectColor = "#1F2023",
+                ShowMessageWithEffect = true,
+                EffectArea = this,
+                ParentWindow = this
             };
 
-            // msg.Show();
+           var ok = messageBox.Show(Mensaje,Titulo, AmRoMessageBoxButton.OkCancel);
 
-            if (msg.Result.Equals(MessageBoxResult.OK))
+            Console.Write(ok);
+
+            if (true)
             {
                 return true;
             }
@@ -297,7 +293,7 @@ namespace ProyectoTPV
             }
             else
             {
-                MaterialMessageBox.Show("No tienes lineas de venta");
+               AmRoMessageBox.ShowDialog("No tienes lineas de venta");
             }
         }
 
@@ -433,7 +429,7 @@ namespace ProyectoTPV
             }
             else
             {
-                MaterialMessageBox.Show("Pin incorrecto");
+               AmRoMessageBox.ShowDialog("Pin incorrecto");
             }
 
         }
@@ -660,7 +656,8 @@ namespace ProyectoTPV
 
                     mensageErrores += error.ErrorMessage + Environment.NewLine;
                 }
-                MaterialMessageBox.Show(mensageErrores, @"/!\ERROR/!\"); return false;
+                AmRoMessageBox.ShowDialog(mensageErrores, @"/!\ERROR/!\");
+                return false;
             }
             else
             {
@@ -769,7 +766,7 @@ namespace ProyectoTPV
                     {
                         u.CategoriaRepository.Create(cat);
 
-                        MaterialMessageBox.Show("Guardado correctamente");
+                       AmRoMessageBox.ShowDialog("Guardado correctamente");
                         deshabilitarCamposCategorias();
                         refreshComboBoxCategorias();
                         refreshDatagrids();
@@ -778,7 +775,7 @@ namespace ProyectoTPV
                     }
                     else
                     {
-                        MaterialMessageBox.Show("Ya existe una categoría con el mismo nombre");
+                       AmRoMessageBox.ShowDialog("Ya existe una categoría con el mismo nombre");
                     }
 
                 }
@@ -786,7 +783,7 @@ namespace ProyectoTPV
                 {
                     u.CategoriaRepository.Update(cat);
 
-                    MaterialMessageBox.Show("Guardado correctamente");
+                   AmRoMessageBox.ShowDialog("Guardado correctamente");
                     deshabilitarCamposCategorias();
                     refreshComboBoxCategorias();
                     refreshDatagrids();
@@ -816,13 +813,13 @@ namespace ProyectoTPV
                     catch (Exception er)
                     {
                         Console.WriteLine(er);
-                        MaterialMessageBox.Show("Error al intentar borrar");
+                       AmRoMessageBox.ShowDialog("Error al intentar borrar");
                     }
                 }
             }
             else
             {
-                MaterialMessageBox.Show("Selecciona una categoría a borrar");
+               AmRoMessageBox.ShowDialog("Selecciona una categoría a borrar");
             }
         }
 
@@ -1006,7 +1003,7 @@ namespace ProyectoTPV
                     if (!u.ProductoRepository.GetAll().Any(c => c.Nombre.Equals(prod.Nombre)))
                     {
                         u.ProductoRepository.Create(prod);
-                        MaterialMessageBox.Show("Guardado correctamente");
+                       AmRoMessageBox.ShowDialog("Guardado correctamente");
                         deshabilitarCamposProductos();
                         limiparCamposProductos();
                         img_Producto.Source = null;
@@ -1015,13 +1012,13 @@ namespace ProyectoTPV
                     }
                     else
                     {
-                        MaterialMessageBox.Show("Ya existe un producto con el mismo nombre");
+                       AmRoMessageBox.ShowDialog("Ya existe un producto con el mismo nombre");
                     }
                 }
                 else
                 {
                     u.ProductoRepository.Update(prod);
-                    MaterialMessageBox.Show("Guardado correctamente");
+                   AmRoMessageBox.ShowDialog("Guardado correctamente");
                     deshabilitarCamposProductos();
                     limiparCamposProductos();
                     img_Producto.Source = null;
@@ -1047,13 +1044,13 @@ namespace ProyectoTPV
                     catch (Exception er)
                     {
                         Console.WriteLine(er);
-                        MaterialMessageBox.Show("Error al intentar borrar");
+                       AmRoMessageBox.ShowDialog("Error al intentar borrar");
                     }
                 }
             }
             else
             {
-                MaterialMessageBox.Show("Selecciona un producto a borrar");
+               AmRoMessageBox.ShowDialog("Selecciona un producto a borrar");
             }
         }
 
@@ -1234,7 +1231,7 @@ namespace ProyectoTPV
                     if (!u.UsuarioRepository.GetAll().Any(c => c.Login.Equals(usr.Login)))
                     {
                         u.UsuarioRepository.Create(usr);
-                        MaterialMessageBox.Show("Guardado correctamente");
+                       AmRoMessageBox.ShowDialog("Guardado correctamente");
                         deshabilitarCamposUsuario();
                         limpiarCamposUsuario();
                         Load_Usuarios();
@@ -1242,13 +1239,13 @@ namespace ProyectoTPV
                     }
                     else
                     {
-                        MaterialMessageBox.Show("Ya existe un usuario con el mismo Login");
+                       AmRoMessageBox.ShowDialog("Ya existe un usuario con el mismo Login");
                     }
                 }
                 else
                 {
                     u.UsuarioRepository.Update(usr);
-                    MaterialMessageBox.Show("Guardado correctamente");
+                   AmRoMessageBox.ShowDialog("Guardado correctamente");
                     deshabilitarCamposUsuario();
                     limpiarCamposUsuario();
                     Load_Usuarios();
@@ -1275,15 +1272,15 @@ namespace ProyectoTPV
                         catch (Exception er)
                         {
                             Console.WriteLine(er);
-                            MaterialMessageBox.Show("Error al intentar borrar", "Error");
+                           AmRoMessageBox.ShowDialog("Error al intentar borrar", "Error");
                         }
                     }
                 }
-                else { MaterialMessageBox.Show("No puede borrar el usuario, está actualmente activo", "Error"); }
+                else {AmRoMessageBox.ShowDialog("No puede borrar el usuario, está actualmente activo", "Error"); }
             }
             else
             {
-                MaterialMessageBox.Show("Selecciona un usuario a borrar", "Error");
+               AmRoMessageBox.ShowDialog("Selecciona un usuario a borrar", "Error");
             }
         }
 
