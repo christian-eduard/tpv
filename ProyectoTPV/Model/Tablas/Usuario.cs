@@ -34,15 +34,19 @@ namespace ProyectoTPV.Model
 
         [Required(ErrorMessage = "Pin obligatorio")]
         [RegularExpression(@"\d\d\d\d", ErrorMessage = "introduce un pin de 4 cifras")]
+        [StringLength(100, MinimumLength = 2)]
         public string Pin { get; set; }
 
         [Required(ErrorMessage = "tipo de usuario obligatorio")]
         [RegularExpression("usuario|admin")]
+        [StringLength(100, MinimumLength = 2)]
         public string TipoUsuario { get; set; }
 
         [RegularExpression(@"(^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$)?",ErrorMessage ="Introduce un correo válido")]
+        [StringLength(100, MinimumLength = 2)]
         public string Email { get; set; }
 
+        [StringLength(100, MinimumLength = 2)]
         public string RutaImagen { get; set; }
 
         //PROPIEDADES DE NAVEGACION

@@ -37,10 +37,10 @@ namespace ProyectoTPV.Model
 
         public int Iva { get; set; }
 
-
+        [StringLength(100, MinimumLength = 0)]
         public string Descripcion { get; set; }
 
-
+        [StringLength(100, MinimumLength = 0)]
         public string RutaImagen { get; set; }
 
 

@@ -74,12 +74,26 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.10.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.10.8\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.10.8\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=2.6.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.2.6.0\lib\net452\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -101,33 +115,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201702111607207_1.cs" />
-    <Compile Include="Migrations\201702111607207_1.Designer.cs">
-      <DependentUpon>201702111607207_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702111611340_2.cs" />
-    <Compile Include="Migrations\201702111611340_2.Designer.cs">
-      <DependentUpon>201702111611340_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702111831335_3.cs" />
-    <Compile Include="Migrations\201702111831335_3.Designer.cs">
-      <DependentUpon>201702111831335_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702121810111_4.cs" />
-    <Compile Include="Migrations\201702121810111_4.Designer.cs">
-      <DependentUpon>201702121810111_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702121850159_5.cs" />
-    <Compile Include="Migrations\201702121850159_5.Designer.cs">
-      <DependentUpon>201702121850159_5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702121912462_6.cs" />
-    <Compile Include="Migrations\201702121912462_6.Designer.cs">
-      <DependentUpon>201702121912462_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702140755512_7.cs" />
-    <Compile Include="Migrations\201702140755512_7.Designer.cs">
-      <DependentUpon>201702140755512_7.cs</DependentUpon>
+    <Compile Include="Migrations\201901162058595_tpv-migration.cs" />
+    <Compile Include="Migrations\201901162058595_tpv-migration.Designer.cs">
+      <DependentUpon>201901162058595_tpv-migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ticket.xaml.cs">
@@ -178,26 +168,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201702111607207_1.resx">
-      <DependentUpon>201702111607207_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702111611340_2.resx">
-      <DependentUpon>201702111611340_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702111831335_3.resx">
-      <DependentUpon>201702111831335_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702121810111_4.resx">
-      <DependentUpon>201702121810111_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702121850159_5.resx">
-      <DependentUpon>201702121850159_5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702121912462_6.resx">
-      <DependentUpon>201702121912462_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702140755512_7.resx">
-      <DependentUpon>201702140755512_7.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901162058595_tpv-migration.resx">
+      <DependentUpon>201901162058595_tpv-migration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

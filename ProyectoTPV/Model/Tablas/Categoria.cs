@@ -24,7 +24,10 @@ namespace ProyectoTPV.Model
         [Index(IsUnique = true)]
         public string Nombre { get; set; }
 
+        [StringLength(100, MinimumLength = 0)]
         public string Descripcion { get; set; }
+
+        [StringLength(100, MinimumLength = 0)]
         public string RutaImagen { get; set; }
 
         //PROPIEDADES DE NAVEGACION

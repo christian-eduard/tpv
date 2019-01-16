@@ -6,14 +6,14 @@ namespace ProyectoTPV.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _4 : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
+    public sealed partial class tpvmigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_4));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(tpvmigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201702121810111_4"; }
+            get { return "201901162058595_tpv-migration"; }
         }
         
         string IMigrationMetadata.Source
