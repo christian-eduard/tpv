@@ -37,16 +37,16 @@
                     </Grid>
                     <TextBlock x:Name="textblockusuarioSeleccionado" Foreground="Black" FontWeight="Thin" Text="Hola, selecciona tu usuario e introduce tu pin." VerticalAlignment="Top" Margin="0,100,0,0" HorizontalAlignment="Center" FontSize="40"/>
                     <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0" FontSize="80" MaxLength="4" Width="200" HorizontalContentAlignment="Center" Height="100"></PasswordBox>
-                    <Button x:Name="btn_1" Width="50" Height="50" Content="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,350,0,0" Click="btn_1_Click"></Button>
-                    <Button x:Name="btn_2" Width="50" Height="50" Content="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,350,0,0" Click="btn_2_Click"></Button>
-                    <Button x:Name="btn_3" Width="50" Height="50" Content="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,350,0,0" Click="btn_3_Click"></Button>
-                    <Button x:Name="btn_4" Width="50" Height="50" Content="4" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,420,0,0" Click="btn_4_Click"></Button>
-                    <Button x:Name="btn_5" Width="50" Height="50" Content="5" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,420,0,0" Click="btn_5_Click"></Button>
-                    <Button x:Name="btn_6" Width="50" Height="50" Content="6" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,420,0,0" Click="btn_6_Click"></Button>
-                    <Button x:Name="btn_7" Width="50" Height="50" Content="7" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,490,0,0" Click="btn_7_Click"></Button>
-                    <Button x:Name="btn_8" Width="50" Height="50" Content="8" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,490,0,0" Click="btn_8_Click"></Button>
-                    <Button x:Name="btn_9" Width="50" Height="50" Content="9" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,490,0,0" Click="btn_9_Click"></Button>
-                    <Button x:Name="btn_0" Width="50" Height="50" Content="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,560,0,0" Click="btn_0_Click"></Button>
+                    <Button x:Name="btn_1" Width="50" Height="50" Content="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,350,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_2" Width="50" Height="50" Content="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,350,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_3" Width="50" Height="50" Content="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,350,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_4" Width="50" Height="50" Content="4" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,420,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_5" Width="50" Height="50" Content="5" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,420,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_6" Width="50" Height="50" Content="6" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,420,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_7" Width="50" Height="50" Content="7" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,490,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_8" Width="50" Height="50" Content="8" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,490,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_9" Width="50" Height="50" Content="9" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,490,0,0" Click="writePasswordNumber"></Button>
+                    <Button x:Name="btn_0" Width="50" Height="50" Content="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,560,0,0" Click="writePasswordNumber"></Button>
                     <Button x:Name="btn_c" Width="50" Height="50" Padding="0" Background="#f44336" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_c_Click" Margin="-150,560,0,0">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="Eraser" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
