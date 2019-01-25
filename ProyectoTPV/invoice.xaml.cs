@@ -11,63 +11,63 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ProyectoTPV.Model;
+using OpenPOS.Model;
 
-namespace ProyectoTPV
+namespace OpenPOS
 {
     /// <summary>
-    /// Lógica de interacción para ticket.xaml
+    /// Lógica de interacción para invoice.xaml
     /// </summary>
-    public partial class ticket : Window
+    public partial class invoice : Window
     {
-        public ticket(TicketVenta ticket)
+        public invoice(Invoice ticket)
         {
 
             InitializeComponent();
             tv = ticket;
-            rellenarTicket();
+            drawInvoice();
         }
-        TicketVenta tv;
+        Invoice tv;
         UnitOfWork u = new UnitOfWork();
 
 
-        public void rellenarTicket()
+        public void drawInvoice()
         {
-            foreach (LineaVenta lv in tv.LineaVenta.ToList())
+            foreach (SalesLine lv in tv.SalesLine.ToList())
             {
                 Label lb = new Label();
                 lb.HorizontalAlignment = HorizontalAlignment.Center;
-                lb.Content = lv.Unidades + " - " + lv.Producto.Nombre + " - " + lv.Producto.Precio + "€" + " - " + lv.Unidades * lv.Producto.Precio + "€";
-                stackpanel_ticket.Children.Add(lb);
+                lb.Content = lv.Unit + " - " + lv.Item.Name + " - " + lv.Item.Price + "€" + " - " + lv.Unit * lv.Item.Price + "€";
+                stackpanel_invoice.Children.Add(lb);
             }
-            stackpanel_ticket.Children.Add(new Separator());
+            stackpanel_invoice.Children.Add(new Separator());
 
             Label lbBaseImponible = new Label();
-            decimal total = tv.LineaVenta.Sum(c => c.Unidades * c.Producto.Precio);
+            decimal total = tv.SalesLine.Sum(c => c.Unit * c.Item.Price);
             lbBaseImponible.HorizontalAlignment = HorizontalAlignment.Stretch;
             lbBaseImponible.FontSize = 14;
             lbBaseImponible.Content = "Base imponible " + Math.Round((total / 1.1m), 2) + "€";
-            stackpanel_ticket.Children.Add(lbBaseImponible);
+            stackpanel_invoice.Children.Add(lbBaseImponible);
 
             Label iva = new Label();
             iva.Content = "IVA (10%)" + Math.Round((total / 1.1m) * 0.1m, 2) + "€";
             iva.HorizontalAlignment = HorizontalAlignment.Stretch;
 
-            stackpanel_ticket.Children.Add(iva);
+            stackpanel_invoice.Children.Add(iva);
 
             Label lbtotal = new Label();
             lbtotal.FontSize = 15;
             lbtotal.FontWeight = FontWeights.Bold;
             lbtotal.HorizontalAlignment = HorizontalAlignment.Stretch;
             lbtotal.Content = "TOTAL: " + total + "€";
-            stackpanel_ticket.Children.Add(lbtotal);
+            stackpanel_invoice.Children.Add(lbtotal);
 
             Label lbAtendido = new Label();
             lbAtendido.FontSize = 12;
             lbAtendido.FontWeight = FontWeights.Bold;
             lbAtendido.HorizontalAlignment = HorizontalAlignment.Stretch;
-            lbAtendido.Content = "Le atendió " + tv.Usuario.Nombre + " " + tv.Usuario.Apellidos;
-            stackpanel_ticket.Children.Add(lbAtendido);
+            lbAtendido.Content = "Le atendió " + tv.User.Name + " " + tv.User.LastName;
+            stackpanel_invoice.Children.Add(lbAtendido);
         }
 
     }

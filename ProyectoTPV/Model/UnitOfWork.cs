@@ -1,85 +1,82 @@
-﻿using ProyectoTPV.Model;
-using System;
-using System.Linq;
+﻿using System;
 
-
-namespace ProyectoTPV.Model
+namespace OpenPOS.Model
 {
     public class UnitOfWork : IDisposable
     {
-        private TpvEntities context = new TpvEntities();
+        private OpenPOSEntities context = new OpenPOSEntities();
         private bool disposed = false;
 
 
-        private CategoriaRepository categoriaRepository;
-        private LineaVentaRepository lineaVentaRepository;
-        private ProductoRepository productoRepository;
-        private TicketVentaRepository ticketVentaRepository;
-        private UsuarioRepository usuarioRepository;
+        private GroupRepository groupRepository;
+        private SalesLineRepository salesLineRepository;
+        private ItemRepository itemRepository;
+        private InvoiceRepository invoiceRepository;
+        private UserRepository userRepository;
 
-        public CategoriaRepository CategoriaRepository
+        public GroupRepository GroupRepository
         {
             get
             {
-                if (this.categoriaRepository == null)
+                if (this.groupRepository == null)
                 {
-                    this.categoriaRepository =
-                        new CategoriaRepository(context);
+                    this.groupRepository =
+                        new GroupRepository(context);
                 }
 
-                return categoriaRepository;
+                return groupRepository;
             }
         }
-        public LineaVentaRepository LineaVentaRepository
+        public SalesLineRepository SalesLineRepository
         {
             get
             {
-                if (this.lineaVentaRepository == null)
+                if (this.salesLineRepository == null)
                 {
-                    this.lineaVentaRepository =
-                        new LineaVentaRepository(context);
+                    this.salesLineRepository =
+                        new SalesLineRepository(context);
                 }
 
-                return lineaVentaRepository;
+                return salesLineRepository;
             }
         }
-        public ProductoRepository ProductoRepository
+        public ItemRepository ItemRepository
         {
             get
             {
-                if (this.productoRepository == null)
+                if (this.itemRepository == null)
                 {
-                    this.productoRepository =
-                        new ProductoRepository(context);
+                    this.itemRepository =
+                        new ItemRepository(context);
                 }
 
-                return productoRepository;
+                return itemRepository;
             }
         }
-        public TicketVentaRepository TicketVentaRepository
+        public InvoiceRepository InvoiceRepository
         {
             get
             {
-                if (this.ticketVentaRepository == null)
+                if (this.invoiceRepository == null)
                 {
-                    this.ticketVentaRepository =
-                        new TicketVentaRepository(context);
+                    this.invoiceRepository =
+                        new InvoiceRepository(context);
                 }
 
-                return ticketVentaRepository;
+                return invoiceRepository;
             }
         }
-        public UsuarioRepository UsuarioRepository
+        public UserRepository UserRepository
         {
             get
             {
-                if (this.usuarioRepository == null)
+                if (this.userRepository == null)
                 {
-                    this.usuarioRepository =
-                        new UsuarioRepository(context);
+                    this.userRepository =
+                        new UserRepository(context);
                 }
 
-                return usuarioRepository;
+                return userRepository;
             }
         }
 

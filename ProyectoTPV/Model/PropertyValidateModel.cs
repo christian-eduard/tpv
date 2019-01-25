@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoTPV.Model
+namespace OpenPOS.Model
 {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public abstract class PropertyValidateModel : IDataErrorInfo
