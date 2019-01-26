@@ -1,0 +1,904 @@
+﻿<Window x:Class="ProyectoTPV.MainWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:local="clr-namespace:ProyectoTPV"
+         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+         mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         WindowStartupLocation="CenterScreen"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+         Title="TPV BAR" Height="768" Width="1024"  MinHeight="768" MinWidth="1024"
+           WindowStyle="None" ResizeMode="CanResize"
+        MouseLeftButtonDown="WindowMouseLeftButtonDown">
+    <Window.Resources>
+        <local:LineaVentaMultiValueConverter x:Key="LineaVentaMultiValueConverter" />
+    </Window.Resources>
+    <x:Code>
+        <![CDATA[            
+                private void WindowMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+                {
+                    try
+                    {
+                        DragMove();
+                    }
+                    catch(Exception er)
+                    {
+                        Console.WriteLine(er);
+                    }
+                }
+    ]]>
+    </x:Code>
+
+
+    <!--   WindowState="Maximized" -->
+
+    <Grid>
+        <materialDesign:Chip x:Name="chip_usuarioVenta"  Margin="0,5,220,0" Panel.ZIndex="1000" HorizontalAlignment="Right" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch"  FontWeight="Thin"  VerticalAlignment="Top" Content="Usuario" Click="chip_usuarioVenta_Click">
+            <materialDesign:Chip.Icon>
+                <materialDesign:PackIcon Kind="Account" Background="Blue" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </materialDesign:Chip.Icon>
+        </materialDesign:Chip>
+        <Button x:Name="btn_closeApp" Width="30" Panel.ZIndex="1000" Height="30" Padding="0" Background="#f44336" FontSize="30" HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Click="btn_closeApp_Click" >
+            <Button.Content>
+                <materialDesign:PackIcon Kind="WindowClose" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Button.Content>
+        </Button>
+        <Button x:Name="btn_MaxMinApp" Width="30" Panel.ZIndex="1000" Height="30" Padding="0" Background="#009688" FontSize="30" HorizontalAlignment="Right" Margin="0,5,50,0" VerticalAlignment="Top" Click="btn_MaxMinApp_Click" >
+            <Button.Content>
+                <materialDesign:PackIcon x:Name="icon_MaxMinApp" Kind="WindowMaximize" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Button.Content>
+        </Button>
+        <Button x:Name="btn_MinimizeApp" Width="30" Panel.ZIndex="1000" Height="30" Padding="0" Background="#009688" FontSize="30" HorizontalAlignment="Right" Margin="0,5,95,0" VerticalAlignment="Top" Click="btn_MinimizeApp_Click" >
+            <Button.Content>
+                <materialDesign:PackIcon Kind="WindowMinimize" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Button.Content>
+        </Button>
+        <dragablz:TabablzControl x:Name="tabControl_Main" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" Width="auto" SelectionChanged="tabControl_Main_SelectionChanged">
+            <TabItem x:Name="tab_usuario">
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="Account" Width="30" Foreground="White" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </TabItem.Header>
+                <Grid>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20"  MinWidth="200">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel x:Name="StackPanel_Usuarios" Orientation="Horizontal"/>
+                        </ScrollViewer>
+                    </Grid>
+                    <TextBlock x:Name="textblockusuarioSeleccionado" Foreground="Black" FontWeight="Thin" Text="Hola, selecciona tu usuario e introduce tu pin." VerticalAlignment="Top" Margin="0,100,0,0" HorizontalAlignment="Center" FontSize="40"/>
+                    <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0" FontSize="80" MaxLength="4" Width="200" HorizontalContentAlignment="Center" Height="100"></PasswordBox>
+                    <Button x:Name="btn_1" Width="50" Height="50" Content="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,350,0,0" Click="btn_1_Click"></Button>
+                    <Button x:Name="btn_2" Width="50" Height="50" Content="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,350,0,0" Click="btn_2_Click"></Button>
+                    <Button x:Name="btn_3" Width="50" Height="50" Content="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,350,0,0" Click="btn_3_Click"></Button>
+                    <Button x:Name="btn_4" Width="50" Height="50" Content="4" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,420,0,0" Click="btn_4_Click"></Button>
+                    <Button x:Name="btn_5" Width="50" Height="50" Content="5" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,420,0,0" Click="btn_5_Click"></Button>
+                    <Button x:Name="btn_6" Width="50" Height="50" Content="6" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,420,0,0" Click="btn_6_Click"></Button>
+                    <Button x:Name="btn_7" Width="50" Height="50" Content="7" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,490,0,0" Click="btn_7_Click"></Button>
+                    <Button x:Name="btn_8" Width="50" Height="50" Content="8" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,490,0,0" Click="btn_8_Click"></Button>
+                    <Button x:Name="btn_9" Width="50" Height="50" Content="9" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,490,0,0" Click="btn_9_Click"></Button>
+                    <Button x:Name="btn_0" Width="50" Height="50" Content="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,560,0,0" Click="btn_0_Click"></Button>
+                    <Button x:Name="btn_c" Width="50" Height="50" Padding="0" Background="#f44336" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_c_Click" Margin="-150,560,0,0">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="Eraser" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="btn_log" Width="50" Height="50" Padding="0" Background="#4caf50" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_log_Click" Margin="150,560,0,0">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="Login" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tab_tpv" Padding="0">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="TPV" Foreground="White" Margin="5" Padding="0" FontSize="12" FontWeight="Bold"/>
+                        <materialDesign:PackIcon Kind="Monitor" Width="30" Foreground="White" Padding="0" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid x:Name="grid_tpvNO">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontWeight="Thin">SELECCIONA UN USUARIO PRIMERO</TextBlock>
+                    </Grid>
+                    <Grid x:Name="grid_tpvSI">
+                        <DockPanel>
+                            <materialDesign:Card DockPanel.Dock="Right" VerticalAlignment="Stretch" Width="300" Padding="5" Margin="5">
+                                <StackPanel>
+                                    <Grid>
+                                        <TextBlock x:Name="txtblock_Total" Background="#EFEBE9" HorizontalAlignment="Center" Text="0" FontSize="50" FontFamily="roboto" FontWeight="Thin" Padding="0" TextAlignment="Center" VerticalAlignment="Top" Width="200" Height="50"  Margin="0,10,0,0"></TextBlock>
+                                        <Label Content="€" FontFamily="roboto" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="170,22,0,0" FontWeight="Thin"></Label>
+                                        <Button x:Name="btn_1c" Width="50" Height="50" Content="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_1c_Click" Margin="-150,80,0,0"></Button>
+                                        <Button x:Name="btn_2c" Width="50" Height="50" Content="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" Click="btn_2c_Click"></Button>
+                                        <Button x:Name="btn_3c" Width="50" Height="50" Content="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,80,0,0" Click="btn_3c_Click"></Button>
+                                        <Button x:Name="btn_4c" Width="50" Height="50" Content="4" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,150,0,0" Click="btn_4c_Click"></Button>
+                                        <Button x:Name="btn_5c" Width="50" Height="50" Content="5" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0" Click="btn_5c_Click"></Button>
+                                        <Button x:Name="btn_6c" Width="50" Height="50" Content="6" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,150,0,0" Click="btn_6c_Click"></Button>
+                                        <Button x:Name="btn_7c" Width="50" Height="50" Content="7" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,220,0,0" Click="btn_7c_Click"></Button>
+                                        <Button x:Name="btn_8c" Width="50" Height="50" Content="8" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,220,0,0" Click="btn_8c_Click"></Button>
+                                        <Button x:Name="btn_9c" Width="50" Height="50" Content="9" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,220,0,0" Click="btn_9c_Click"></Button>
+                                        <Button x:Name="btn_0c" Width="50" Height="50" Content="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,290,0,0" Click="btn_0c_Click"></Button>
+                                        <Button x:Name="btn_cc" Width="50" Height="50" Padding="0" Background="#f44336" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_cc_Click" Margin="150,290,0,0">
+                                            <Button.Content>
+                                                <materialDesign:PackIcon Kind="Eraser" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Button.Content>
+                                        </Button>
+                                        <TextBlock x:Name="txtblock_unidades" Width="50" Height="50" Padding="0" FontSize="45" FontWeight="Thin" Text="0" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-150,290,0,0"></TextBlock>
+                                        <Label Content="Uds." Margin="-90,290,0,0" FontWeight="Thin" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+                                    </Grid>
+                                    <Grid DockPanel.Dock="Right"  Margin="0">
+                                        <DataGrid x:Name="datagridLineaVenta" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" DataContext="{Binding Source=LineaVenta}">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Uds" Width="1*" Binding="{Binding Path=Unidades}"/>
+                                                <DataGridTextColumn Header="Producto" Width="2.5*">
+                                                    <DataGridTextColumn.Binding>
+                                                        <MultiBinding Converter="{StaticResource LineaVentaMultiValueConverter }">
+                                                            <Binding Path="VarianteProducto.Producto.Nombre" />
+                                                            <Binding Path="VarianteProducto.Nombre"/>
+                                                        </MultiBinding>
+                                                    </DataGridTextColumn.Binding>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="PVP" Width="1.5*" Binding="{Binding Path=VarianteProducto.Precio}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+
+                                <materialDesign:Card Padding="0" DockPanel.Dock="Bottom"  Margin="5" HorizontalAlignment="Stretch">
+                                <DockPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                   <!--     <Button x:Name="button_verClientes" Margin="5" Width="100"  Height="50" Padding="5" Background="#311B92" Click="button_verClientes_Click" ToolTip="Ver tickets abiertos" >
+                                            <Button.Content>
+                                                <StackPanel>
+                                                    <materialDesign:PackIcon Kind="Account" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    <TextBlock Text="Clientes" FontSize="20"></TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button> -->
+                                        <Button x:Name="button_ticketsAbiertos" Margin="5" Width="100"  Height="50" Padding="5" Background="#0091EA" Click="button_ticketsAbiertos_Click" ToolTip="Ver tickets abiertos" >
+                                            <Button.Content>
+                                                <StackPanel>
+                                                    <materialDesign:PackIcon Kind="TicketConfirmation" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    <TextBlock Text="Tickets" FontSize="20"></TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button x:Name="button_select_mesa" Margin="5" Width="100"  Height="50" Padding="5" Click="button_select_mesa_Click" ToolTip="Selecciona una mesa" >
+                                            <Button.Content>
+                                                <StackPanel>
+                                                    <materialDesign:PackIcon Kind="Beer" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    <TextBlock Text="Mesas" FontSize="20"></TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                        <materialDesign:Card  Margin="5" Width="100" HorizontalAlignment="Left" ToolTip="Mesa seleccionada" Height="50" Padding="0">
+                                            <StackPanel>
+                                                <materialDesign:PackIcon Kind="Beer" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                <TextBlock x:Name="txtblock_numMesa" Text="Sin mesa" Margin="0,5,0,0" HorizontalAlignment="Center"  FontSize="10"></TextBlock>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button x:Name="button_nuevoTicket" Margin="5" Width="50" Background="#4CAF50" Height="50" Padding="0" Click="button_nuevoTicket_Click" ToolTip="Abre un nuevo ticket" >
+                                            <Button.Content>
+                                                <StackPanel>
+                                                    <materialDesign:PackIcon Kind="PlusCircle" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    <TextBlock Text="Nuevo" FontSize="10"></TextBlock>
+                                                    <TextBlock Text="Ticket" FontSize="10"></TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button x:Name="button_anularLineaVenta" Margin="5" Width="80" Background="#F44336" Height="50" Padding="5" Click="button_anularLineaVenta_Click" ToolTip="Anula una linea de venta" >
+                                            <Button.Content>
+                                                <StackPanel>
+                                                    <materialDesign:PackIcon Kind="Eraser" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    <TextBlock Text="Anular" FontSize="20"></TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button x:Name="button_nuevaVenta" Margin="5" Width="80" Background="#4CAF50" Height="50" Padding="5" Click="button_caja_click" ToolTip="Cierra una venta" >
+                                            <Button.Content>
+                                                <StackPanel>
+                                                    <materialDesign:PackIcon Kind="Cart" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    <TextBlock Text="Caja" FontSize="20"></TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                    </StackPanel>
+                                </DockPanel>
+                                </materialDesign:Card>
+
+                            <materialDesign:Card DockPanel.Dock="Left" Margin="10">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                                    <StackPanel x:Name="StackPanel_Categorias"/>
+                                </ScrollViewer>
+                            </materialDesign:Card>
+
+                            <Grid HorizontalAlignment="Left"  DockPanel.Dock="Left" VerticalAlignment="Top" Margin="20" Width="auto">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <WrapPanel x:Name="WrapPanel_productos" Orientation="Horizontal" />
+                                </ScrollViewer>
+                            </Grid>
+
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tab_admin" ToolTip="Zona Admin">
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="Key" Width="30" Foreground="White" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </TabItem.Header>
+                <Grid>
+                    <Grid x:Name="grid_adminNO">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontWeight="Thin">Necesitas permisos de administrador</TextBlock>
+                    </Grid>
+                    <Grid x:Name="grid_adminSI">
+
+                        <Button x:Name="btn_virtualKeyboard" VerticalAlignment="Bottom" ToolTip="Teclado Virtual" Panel.ZIndex="1000" Click="btn_virtualKeyboard_Click" HorizontalAlignment="Left" Margin="50" Padding="0" Width="60" Height="60">
+                            <Button.Content>
+                                <materialDesign:PackIcon Kind="Keyboard" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50"></materialDesign:PackIcon>
+                            </Button.Content>
+                        </Button>
+
+                        <dragablz:TabablzControl x:Name="tabcontrol_administracion" Background="#bcaaa4" Margin="0" BorderBrush="#8d6e63" TabStripPlacement="Top" SelectionChanged="tabcontrol_administracion_SelectionChanged">
+                            <TabItem Header="Usuarios" x:Name="tabAdmin_Usuarios">
+                                <GroupBox Header="Gestion de Usuarios" materialDesign:ColorZoneAssist.Mode="PrimaryMid" ScrollViewer.CanContentScroll="True" Background="#FAFAFA" Margin="20">
+                                    <Grid Background="WhiteSmoke">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="7*" />
+                                            <ColumnDefinition Width="3*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <DataGrid x:Name="datagridUsuarios"  IsReadOnly="True" SelectionChanged="datagridUsuarios_SelectionChanged" MaxHeight="400" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" DataContext="{Binding Source=Usuario}">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=UsuarioId}"/>
+                                                    <DataGridTextColumn Header="Nombre" Width="*" Binding="{Binding Path=Nombre}"/>
+                                                    <DataGridTextColumn Header="Apellidos" Width="*" Binding="{Binding Path=Apellidos}"/>
+                                                    <DataGridTextColumn Header="Login" Width="*" Binding="{Binding Path=Login}"/>
+                                                    <DataGridTextColumn Header="Pin" Width="*" Binding="{Binding Path=Pin}"/>
+                                                    <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Path=Email}"/>
+                                                    <DataGridTextColumn Header="Permisos" Width="*" Binding="{Binding Path=TipoUsuario}"/>
+                                                    <DataGridTextColumn Header="Ruta Imagen" Width="*" Binding="{Binding Path=RutaImagen}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                        <materialDesign:Card Grid.Column="1" VerticalAlignment="Stretch">
+                                            <StackPanel>
+
+                                                <ComboBox x:Name="comboBox_TipoUsuario" materialDesign:HintAssist.Hint="Permisos de usuario" materialDesign:HintAssist.IsFloating="True" Margin="10" >
+                                                    <ComboBoxItem>usuario</ComboBoxItem>
+                                                    <ComboBoxItem>gerente</ComboBoxItem>
+                                                    <ComboBoxItem>admin</ComboBoxItem>
+                                                </ComboBox>
+
+                                                <TextBox x:Name="txt_nombreUsuario"  materialDesign:HintAssist.Hint="Nombre del usuario" materialDesign:HintAssist.IsFloating="True"  Margin="10"></TextBox>
+                                                <TextBox x:Name="txt_apellidosUsuario"  Margin="10"  materialDesign:HintAssist.Hint="Apellidos del usuario" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                <TextBox x:Name="txt_emailUsuario"  Margin="10" materialDesign:HintAssist.Hint="Email usuario"  materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                <TextBox x:Name="txt_loginUsuario"  Margin="10" materialDesign:HintAssist.Hint="Login usuario" materialDesign:HintAssist.IsFloating="True" />
+                                                <TextBox x:Name="txt_pinUsuario" MaxLength="4" Width="150" HorizontalAlignment="Left" Margin="10"  materialDesign:HintAssist.Hint="Pin 4 cifras" materialDesign:HintAssist.IsFloating="True" />
+                                                <ComboBox x:Name="comboboxImagenUsuario" materialDesign:HintAssist.Hint="Imágenes Disponibles" SelectionChanged="comboboxImagenUsuario_SelectionChanged"  Margin="10"></ComboBox>
+
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                    <Button x:Name="btn_ImagenUsuario" Margin="5" Padding="10" ToolTip="Cargar nueva imagen" Click="btn_ImagenUsuario_Click">
+                                                        <Button.Content>
+                                                            <materialDesign:PackIcon Kind="Image" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button x:Name="btn_guardarUsuario" ToolTip="Guardar cambios" Margin="5" Padding="10" Click="btn_guardarUsuario_Click">
+                                                        <Button.Content>
+                                                            <materialDesign:PackIcon Kind="ContentSave" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button x:Name="btn_borrarUsuario" Margin="5" ToolTip="Eliminar" Padding="10" Click="btn_borrarUsuario_Click">
+                                                        <Button.Content>
+                                                            <materialDesign:PackIcon Kind="Delete" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button x:Name="btn_nuevoUsuario" Margin="5" ToolTip="Nuevo Usuario"  Padding="10" Click="btn_nuevoUsuario_Click">
+                                                        <Button.Content>
+                                                            <materialDesign:PackIcon Kind="PlusCircle" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                </StackPanel>
+                                                <materialDesign:Card HorizontalAlignment="Center" Padding="5" Margin="5" VerticalAlignment="Center">
+                                                    <Image x:Name="img_Usuario" HorizontalAlignment="Center" Width="150" Height="150"></Image>
+                                                </materialDesign:Card>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                    </Grid>
+                                </GroupBox>
+                            </TabItem>
+                            <TabItem Header="Categorias" x:Name="tabAdmin_Categorias">
+                                <dragablz:TabablzControl  x:Name="tabcontrol_cat"  BorderBrush="#8d6e63" TabStripPlacement="Top" Margin="20">
+                                    <TabItem Header="Gestion de Categorias">
+                                        <Grid Background="WhiteSmoke">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="7*" />
+                                                <ColumnDefinition Width="3*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <DataGrid x:Name="datagridCategorias" SelectionChanged="datagridCategorias_SelectionChanged" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top"  DataContext="{Binding Source=Categoria}">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=CategoriaId}"/>
+                                                        <DataGridTextColumn Header="Nombre" Width="*" Binding="{Binding Path=Nombre}"/>
+                                                        <DataGridTextColumn Header="Descripcion" Width="*" Binding="{Binding Path=Descripcion}"/>
+                                                        <DataGridTextColumn Header="Ruta Imagen" Width="*" Binding="{Binding Path=RutaImagen}"/>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </Grid>
+                                            <materialDesign:Card Grid.Column="1" HorizontalContentAlignment="Left" VerticalAlignment="Stretch">
+                                                <StackPanel>
+                                                    <TextBox x:Name="txtboxNombreCategoria" materialDesign:HintAssist.Hint="Nombre categoría" materialDesign:HintAssist.IsFloating="True" Margin="10,40,10,0"/>
+                                                    <TextBox x:Name="txtboxDescripcionCategoria"  materialDesign:HintAssist.Hint="Descripción de la categoría" materialDesign:HintAssist.IsFloating="True" Margin="10"></TextBox>
+                                                    <ComboBox x:Name="combobox_imagenesCategorias" SelectionChanged="combobox_imagenesCategorias_SelectionChanged"  materialDesign:HintAssist.Hint="Imágenes disponibles" Margin="10"></ComboBox>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button x:Name="btn_ImagenCategoria" Margin="10" Padding="10" Click="btn_ImagenCategoria_Click" ToolTip="Cargar nueva imagen" >
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Image" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_guardarCategoria" Click="btn_guardarCategoria_Click" Margin="10" Padding="10" ToolTip="Guardar Cambios">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="ContentSave" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_borrarCategoria" Click="btn_borrarCategoria_Click" Margin="10" Padding="10" ToolTip="Eliminar">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Delete" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_nuevaCategoria" Click="btn_nuevaCategoria_Click" Margin="10" Padding="10" ToolTip="Nueva categoría">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="PlusCircle" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <!-- botones -->
+                                                    <Separator Margin="10"></Separator>
+                                                    <materialDesign:Card HorizontalAlignment="Center" Padding="5" VerticalAlignment="Center">
+                                                        <Image x:Name="img_categoria" HorizontalAlignment="Center" Width="150" Height="150"></Image>
+                                                    </materialDesign:Card>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Gestion de SubCategorias">
+                                        <Grid Background="WhiteSmoke">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="7*" />
+                                                <ColumnDefinition Width="3*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <DataGrid x:Name="datagridSubCategorias" SelectionChanged="datagridSubCategorias_SelectionChanged_1" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top"  DataContext="{Binding Source=SubCategoria}">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=SubCategoriaId}"/>
+                                                        <DataGridTextColumn Header="Categoria Padre" Width="*" Binding="{Binding Path=Categoria.Nombre}"/>
+                                                        <DataGridTextColumn Header="Nombre" Width="*" Binding="{Binding Path=Nombre}"/>
+                                                        <DataGridTextColumn Header="Descripcion" Width="*" Binding="{Binding Path=Descripcion}"/>
+                                                        <DataGridTextColumn Header="Ruta Imagen" Width="*" Binding="{Binding Path=RutaImagen}"/>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </Grid>
+                                            <materialDesign:Card Grid.Column="1" HorizontalContentAlignment="Left" VerticalAlignment="Stretch">
+                                                <StackPanel>
+                                                    <TextBox x:Name="txtboxNombreSubCategoria" materialDesign:HintAssist.Hint="Nombre Subcategoría" materialDesign:HintAssist.IsFloating="True" Margin="10,40,10,0"/>
+                                                    <TextBox x:Name="txtboxDescripcionSubCategoria"  materialDesign:HintAssist.Hint="Descripción de la Subcategoría" materialDesign:HintAssist.IsFloating="True" Margin="10"></TextBox>
+                                                    <ComboBox x:Name="combobox_CategoriaPadre" materialDesign:HintAssist.Hint="Selecciona Categoría padre" Margin="10"></ComboBox>
+                                                    <ComboBox x:Name="combobox_imagenesSubCategorias" SelectionChanged="combobox_imagenesSubCategorias_SelectionChanged"  materialDesign:HintAssist.Hint="Imágenes disponibles" Margin="10"></ComboBox>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button x:Name="btn_ImagenSubCategoria" Margin="10" Padding="10" Click="btn_ImagenSubCategoria_Click" ToolTip="Cargar nueva imagen" >
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Image" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_guardarSubCategoria" Click="btn_guardarSubCategoria_Click" Margin="10" Padding="10" ToolTip="Guardar Cambios">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="ContentSave" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_borrarSubCategoria" Click="btn_borrarSubCategoria_Click" Margin="10" Padding="10" ToolTip="Eliminar">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Delete" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_nuevaSubCategoria" Click="btn_nuevaSubCategoria_Click" Margin="10" Padding="10" ToolTip="Nueva categoría">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="PlusCircle" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <!-- botones -->
+                                                    <Separator Margin="10"></Separator>
+                                                    <materialDesign:Card HorizontalAlignment="Center" Padding="5" VerticalAlignment="Center">
+                                                        <Image x:Name="img_Subcategoria" HorizontalAlignment="Center" Width="150" Height="150"></Image>
+                                                    </materialDesign:Card>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </Grid>
+                                    </TabItem>
+                                    <!-- subcategorias -->
+                                </dragablz:TabablzControl>
+                            </TabItem>
+                            <TabItem Header="Productos" x:Name="tabAdmin_Productos">
+                                <dragablz:TabablzControl  x:Name="tabcontrol_prod"  BorderBrush="#8d6e63" TabStripPlacement="Top" Margin="20">
+                                    <TabItem Header="Gestion de Productos">
+                                        <Grid Background="WhiteSmoke">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="8*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <DataGrid x:Name="datagridProducto"  IsReadOnly="True" SelectionChanged="datagridProducto_SelectionChanged" MaxHeight="400" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" DataContext="{Binding Source=Producto}">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=ProductoId}"/>
+                                                        <DataGridTextColumn Header="Nombre" Width="*" Binding="{Binding Path=Nombre}"/>
+                                                        <DataGridTextColumn Header="Stock" Width="*" Binding="{Binding Path=Stock}"/>
+                                                        <DataGridTextColumn Header="Precio" Width="*" Binding="{Binding Path=Precio}"/>
+                                                        <DataGridTextColumn Header="Iva" Width="*" Binding="{Binding Path=Iva}"/>
+                                                        <DataGridTextColumn Header="Ruta Imagen" Width="*" Binding="{Binding Path=RutaImagen}"/>
+                                                        <DataGridTextColumn Header="Descripcion" Width="*" Binding="{Binding Path=Descripcion}"/>
+                                                        <DataGridTextColumn Header="Categoria" Width="*" Binding="{Binding Path=SubCategoria.Nombre}"/>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </Grid>
+                                            <materialDesign:Card Grid.Column="1" HorizontalContentAlignment="left" VerticalAlignment="Stretch">
+                                                <StackPanel>
+                                                    <StackPanel>
+                                                        <ComboBox x:Name="comboBox_CategoriasProducto" materialDesign:HintAssist.Hint="Elige una categoría" SelectionChanged="comboBox_CategoriasProducto_SelectionChanged" materialDesign:HintAssist.IsFloating="True" Margin="10"></ComboBox>
+                                                        <ComboBox x:Name="comboBox_SubCategoriasProducto" materialDesign:HintAssist.Hint="Elige una subCategoría" materialDesign:HintAssist.IsFloating="True" Margin="10"></ComboBox>
+                                                        <TextBox x:Name="txt_nombreProducto" materialDesign:HintAssist.Hint="Producto min 2 letras" materialDesign:HintAssist.IsFloating="True"  Margin="10"></TextBox>
+                                                        <TextBox x:Name="txt_descripcionProducto"  Margin="10"  materialDesign:HintAssist.Hint="Descripción del producto" materialDesign:HintAssist.IsFloating="True"></TextBox>
+
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                            <TextBox x:Name="txt_precioProducto"  Margin="10"   materialDesign:HintAssist.Hint="Precio €" materialDesign:HintAssist.IsFloating="True" />
+                                                            <ComboBox x:Name="comboboxIVA" materialDesign:HintAssist.Hint="Iva" materialDesign:HintAssist.IsFloating="True" HorizontalContentAlignment="Center" Margin="10" IsEditable="True" >
+                                                                <ComboBoxItem>4</ComboBoxItem>
+                                                                <ComboBoxItem>8</ComboBoxItem>
+                                                                <ComboBoxItem IsSelected="True">10</ComboBoxItem>
+                                                                <ComboBoxItem>21</ComboBoxItem>
+                                                            </ComboBox>
+                                                            <TextBox x:Name="txt_StockInicial" materialDesign:HintAssist.Hint="Stock init." materialDesign:HintAssist.IsFloating="True"  Margin="10" />
+                                                        </StackPanel>
+                                                        <ComboBox x:Name="comboBoxImagenProductos" materialDesign:HintAssist.Hint="Imágenes Disponibles" materialDesign:HintAssist.IsFloating="True" SelectionChanged="comboBoxImagenProductos_SelectionChanged" Width="145" Margin="10"></ComboBox>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button x:Name="btn_ImagenProducto" Margin="5" Padding="10" ToolTip="Cargar nueva imagen" Click="btn_ImagenProducto_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Image" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_guardarProducto" ToolTip="Guardar cambios" Margin="5" Padding="10" Click="btn_guardarProducto_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="ContentSave" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_borrarProducto" Margin="5" ToolTip="Eliminar" Padding="10" Click="btn_borrarProducto_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Delete" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_nuevoProducto" Margin="5" ToolTip="Nuevo producto" materialDesign:HintAssist.Hint="Nuevo Producto" Padding="10" Click="btn_nuevoProducto_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="PlusCircle" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <Separator Margin="10"></Separator>
+                                                    <materialDesign:Card HorizontalAlignment="Center" Padding="5" VerticalAlignment="Center">
+                                                        <Image x:Name="img_Producto" HorizontalAlignment="Center" Width="150" Height="150"></Image>
+                                                    </materialDesign:Card>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Gestion de Variantes Productos">
+                                        <Grid Background="WhiteSmoke">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="8*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <DataGrid x:Name="datagridVarianteProducto"  IsReadOnly="True" SelectionChanged="datagridVarianteProducto_SelectionChanged" MaxHeight="400" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" DataContext="{Binding Source=VarianteProducto}">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=ProductoId}"/>
+                                                        <DataGridTextColumn Header="Prod. Padre" Width="*" Binding="{Binding Path=Producto.Nombre}" />
+                                                        <DataGridTextColumn Header="Nombre" Width="*" Binding="{Binding Path=Nombre}"/>
+                                                        <DataGridTextColumn Header="Stock" Width="*" Binding="{Binding Path=Stock}"/>
+                                                        <DataGridTextColumn Header="Precio" Width="*" Binding="{Binding Path=Precio}"/>
+                                                        <DataGridTextColumn Header="Descripcion" Width="*" Binding="{Binding Path=Descripcion}"/>
+                                                        <DataGridTextColumn Header="Imagen" Width="*" Binding="{Binding Path=RutaImagen}"/>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </Grid>
+                                            <materialDesign:Card Grid.Column="1" HorizontalContentAlignment="left" VerticalAlignment="Stretch">
+                                                <StackPanel>
+                                                    <StackPanel>
+                                                        <ComboBox x:Name="comboBox_ProductoPadre" materialDesign:HintAssist.Hint="Producto padre" materialDesign:HintAssist.IsFloating="True" Margin="10"></ComboBox>
+                                                        <TextBox x:Name="txt_nombreVarianteProducto" materialDesign:HintAssist.Hint="Nombre Variante" materialDesign:HintAssist.IsFloating="True"  Margin="10"></TextBox>
+                                                        <TextBox x:Name="txt_descripcionVarianteProducto"  Margin="10"  materialDesign:HintAssist.Hint="Descripción" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                        <TextBox x:Name="txt_StockInicialVariante" materialDesign:HintAssist.Hint="Stock Inicial" materialDesign:HintAssist.IsFloating="True"  Margin="10" />
+                                                        <TextBox x:Name="txt_precioVarianteProducto"  Margin="10"  materialDesign:HintAssist.Hint="Precio € ejm: 1.20" materialDesign:HintAssist.IsFloating="True" />
+
+                                                        <ComboBox x:Name="comboBoxImagenVarianteProductos" materialDesign:HintAssist.Hint="Imágenes Disponibles" materialDesign:HintAssist.IsFloating="True" SelectionChanged="comboBoxImagenVarianteProductos_SelectionChanged" Width="145" Margin="10"></ComboBox>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                                                        <Button x:Name="btn_ImagenVarianteProducto" Padding="10" Margin="5" ToolTip="Cargar nueva imagen" Click="btn_ImagenVarianteProducto_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Image" Padding="0"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_guardarVarianteProducto" ToolTip="Guardar cambios"  Padding="10" Margin="5" Click="btn_guardarVarianteProducto_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="ContentSave" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_borrarVarianteProducto" Margin="5" ToolTip="Eliminar" Padding="10" Click="btn_borrarVarianteProducto_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Delete" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_nuevoVarianteProducto" Margin="5" ToolTip="Nuevo producto" materialDesign:HintAssist.Hint="Nuevo Producto" Padding="10" Click="btn_nuevoVarianteProducto_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="PlusCircle" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <Separator Margin="10"></Separator>
+                                                    <materialDesign:Card HorizontalAlignment="Center" Padding="5" VerticalAlignment="Center">
+                                                        <Image x:Name="img_VarianteProducto" HorizontalAlignment="Center" Width="150" Height="150"></Image>
+                                                    </materialDesign:Card>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </Grid>
+                                    </TabItem>
+                                    
+                                </dragablz:TabablzControl>
+                            </TabItem>
+                            <TabItem Header="Proveedores" x:Name="tabAdmin_Proveedores">
+
+                                <dragablz:TabablzControl  x:Name="tabcontrol_proveedores"  BorderBrush="#8d6e63" TabStripPlacement="Top" Margin="20">
+                                    <TabItem Header="Gestion de Proveedores">
+                                        <Grid Background="WhiteSmoke">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="8*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <DataGrid x:Name="datagridProveedores"  IsReadOnly="True" SelectionChanged="datagridProveedores_SelectionChanged" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" DataContext="{Binding Source=Proveedor}">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=ProveedorId}"/>
+                                                        <DataGridTextColumn Header="Compañía" Width="*" Binding="{Binding Path=Nombre}"/>
+                                                        <DataGridTextColumn Header="Contacto" Width="*" Binding="{Binding Path=NombreContacto}"/>
+                                                        <DataGridTextColumn Header="Cif" Width="*" Binding="{Binding Path=Cif}"/>
+                                                        <DataGridTextColumn Header="Direccion" Width="*" Binding="{Binding Path=Direccion}"/>
+                                                        <DataGridTextColumn Header="Telefono" Width="*" Binding="{Binding Path=Telefono}"/>
+                                                        <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Path=Email}"/>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </Grid>
+                                            <materialDesign:Card Grid.Column="1" HorizontalContentAlignment="left" VerticalAlignment="Stretch">
+                                                <StackPanel>
+                                                    <StackPanel>
+                                                        <TextBox x:Name="txt_nombreProveedor" materialDesign:HintAssist.Hint="Nombre Proveedor" materialDesign:HintAssist.IsFloating="True"  Margin="10"></TextBox>
+                                                        <TextBox x:Name="txt_nombreContactoProveedor"  Margin="10"  materialDesign:HintAssist.Hint="Nombre de contacto" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                        <TextBox x:Name="txt_cifProveedor"  Margin="10"  materialDesign:HintAssist.Hint="Cif" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                        <TextBox x:Name="txt_direccionProveedor"  Margin="10"  materialDesign:HintAssist.Hint="Dirección" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                        <TextBox x:Name="txt_telefonoProveedor"  Margin="10"  materialDesign:HintAssist.Hint="Telefono" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                        <TextBox x:Name="txt_emailProveedor"  Margin="10"  materialDesign:HintAssist.Hint="Correo Electronico" materialDesign:HintAssist.IsFloating="True"></TextBox>
+
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button x:Name="btn_guardarProveedor" ToolTip="Guardar cambios" Margin="5" Padding="10" Click="btn_guardarProveedor_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="ContentSave" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_borrarProveedor" Margin="5" ToolTip="Eliminar" Padding="10" Click="btn_borrarProveedor_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Delete" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_nuevoProveedor" Margin="5" ToolTip="Nuevo producto" materialDesign:HintAssist.Hint="Nuevo Proveedor" Padding="10" Click="btn_nuevoProveedor_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="PlusCircle" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Gestion Catalogo de proveedor">
+                                        <Grid Background="WhiteSmoke">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="5*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <StackPanel Margin="5">
+                                                    <ComboBox x:Name="comboBox_proveedorCatalogo" Padding="5" HorizontalAlignment="Stretch" IsEditable="True" SelectionChanged="comboBox_proveedorCatalogo_SelectionChanged" materialDesign:HintAssist.Hint="Busca un proveedor" materialDesign:HintAssist.IsFloating="True"/>
+                                                    <DataGrid x:Name="datagridCatalogoProveedor" SelectionMode="Single" IsReadOnly="True" SelectionChanged="datagridVarianteProducto_SelectionChanged" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" DataContext="{Binding Source=Producto}">
+                                                        <DataGrid.Columns>
+                                                            <DataGridTextColumn Header="Producto" Width="*" Binding="{Binding Path=Nombre}"/>
+                                                        </DataGrid.Columns>
+                                                    </DataGrid>
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <StackPanel Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <Button x:Name="btn_ProductosToProveedor" ToolTip="Asignar a proveedor" Margin="5" Padding="10" Click="btn_ProductosToProveedor_Click">
+                                                        <Button.Content>
+                                                            <materialDesign:PackIcon Kind="ArrowLeft" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Separator Margin="5"/>
+                                                    <Button x:Name="btn_ProveedorToProductos" ToolTip="quitar de proveedor" Margin="5" Padding="10" Click="btn_ProveedorToProductos_Click">
+                                                        <Button.Content>
+                                                            <materialDesign:PackIcon Kind="ArrowRight" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                <StackPanel>
+                                                    <StackPanel Margin="5" HorizontalAlignment="Stretch">
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                                            <Button x:Name="btn_proveedorCatalogoMostrarTodo" Margin="5" ToolTip="ver todos los productos" Padding="10" Click="btn_proveedorCatalogoMostrarTodo_Click">
+                                                                <Button.Content>
+                                                                    <materialDesign:PackIcon Kind="Eye" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Button.Content>
+                                                            </Button>
+                                                            <ComboBox x:Name="comboBox_proveedorCatalogoProductos" Padding="5" HorizontalAlignment="Stretch" MinWidth="400" IsEditable="True" SelectionChanged="comboBox_proveedorCatalogoProductos_SelectionChanged" materialDesign:HintAssist.Hint="Busca un producto" materialDesign:HintAssist.IsFloating="True"/>
+                                                        </StackPanel>
+                                                        <DataGrid x:Name="datagridCatalogoProveedorProductos" CanUserAddRows="false" SelectionChanged="datagridCatalogoProveedorProductos_SelectionChanged" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" DataContext="{Binding Source=Producto}">
+                                                            <DataGrid.Columns>
+                                                                <DataGridTemplateColumn Header="Selección" IsReadOnly="True">
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <CheckBox x:Name="checkboxProveedor"  Checked="checkboxProveedor_Checked" Unchecked="checkboxProveedor_Unchecked"/>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                </DataGridTemplateColumn>
+                                                                <DataGridTextColumn Header="Producto"  IsReadOnly="True" Width="3*" Binding="{Binding Path=Nombre}"/>
+                                                                <DataGridTextColumn Header="Proveedor"  IsReadOnly="True" Width="3*" Binding="{Binding Path=Proveedor.Nombre}"/>
+                                                            </DataGrid.Columns>
+                                                        </DataGrid>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Grid>
+                                    </TabItem>
+                                </dragablz:TabablzControl>
+                            </TabItem>
+                            <!-- Mesas-->
+                            <TabItem Header="Mesas" x:Name="tabAdmin_mesas">
+                                <dragablz:TabablzControl  x:Name="tabcontrol_mesas"  BorderBrush="#8d6e63" TabStripPlacement="Top" Margin="20">
+                                    <TabItem Header="Gestion de Productos">
+                                        <Grid Background="WhiteSmoke">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="8*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <DataGrid x:Name="datagridmesas"  IsReadOnly="True" SelectionChanged="datagridmesas_SelectionChanged" MaxHeight="400" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" DataContext="{Binding Source=Mesa}">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=MesaId}"/>
+                                                        <DataGridTextColumn Header="Nombre Mesa" Width="*" Binding="{Binding Path=NombreMesa}"/>
+                                                        <DataGridTextColumn Header="Capacidad" Width="*" Binding="{Binding Path=Capacidad}"/>
+                                                        <DataGridTextColumn Header="Precio Incremento" Width="*" Binding="{Binding Path=IncrementoMesa}"/>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </Grid>
+                                            <materialDesign:Card Grid.Column="1" HorizontalContentAlignment="left" VerticalAlignment="Stretch">
+                                                <StackPanel>
+                                                    <StackPanel>
+                                                        <Image Source="images/mesabar.jpg" Margin="20"></Image>
+                                                        <TextBox x:Name="txt_MesaDescripcion"  materialDesign:HintAssist.Hint="Nombre / Número de mesa" materialDesign:HintAssist.IsFloating="True"  Margin="10"></TextBox>
+                                                        <TextBox x:Name="txt_MesaPrecioIncremento"  Margin="10"  materialDesign:HintAssist.Hint="Incremento del precio" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                        <TextBox x:Name="txt_MesaCapacidad"  Margin="10" materialDesign:HintAssist.Hint="Capacidad Max"  materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                                                        <Button x:Name="btn_guardarMesa" ToolTip="Guardar cambios"  Padding="10" Click="btn_guardarMesa_Click" Margin="5" >
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="ContentSave" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_borrarMesa" Margin="5" ToolTip="Eliminar" Padding="10" Click="btn_borrarMesa_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Delete" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <Button x:Name="btn_nuevaMesa" Margin="5" ToolTip="Nuevo producto" materialDesign:HintAssist.Hint="Nueva Mesa" Padding="10" Click="btn_nuevaMesa_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="PlusCircle" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </Grid>
+                                    </TabItem>
+
+                                </dragablz:TabablzControl>
+                            </TabItem>
+                        </dragablz:TabablzControl>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tab_pedidos" ToolTip="Pedidos">
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="Archive" Width="30" Foreground="White" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </TabItem.Header>
+                <Grid>
+                    <Grid x:Name="grid_pedidosNO">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontWeight="Thin">NO TIENES PERMISOS DE ACCESO</TextBlock>
+                    </Grid>
+                    <Grid x:Name="grid_pedidosSI">
+                        <dragablz:TabablzControl  x:Name="tabcontrol_pedidos"  BorderBrush="#8d6e63" TabStripPlacement="Top" Margin="20">
+                            <TabItem Header="Realizar Pedidos">
+                                <Grid Background="WhiteSmoke">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <Grid Margin="5">
+                                            <DataGrid x:Name="datagridPedidos" IsReadOnly="True" SelectionChanged="datagridPedidos_SelectionChanged" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="300" DataContext="{Binding Source=VarianteProducto}">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=VarianteProductoId}"/>
+                                                    <DataGridTextColumn Header="Producto" Width="*" Binding="{Binding Path=Producto.Nombre}"/>
+                                                    <DataGridTextColumn Header="Variante" Width="*" Binding="{Binding Path=Nombre}"/>
+                                                    <DataGridTextColumn Header="Stock" Width="*" Binding="{Binding Path=Stock}"/>
+                                                    <DataGridTextColumn Header="Proveedor" Width="*" Binding="{Binding Path=Producto.Proveedor.Nombre}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                        <Separator Margin="5"></Separator>
+
+                                        <GroupBox Header="Lista de la compra" Margin="5">
+                                            <DataGrid x:Name="datagridLineaspedidos" IsReadOnly="True" SelectionChanged="datagridLineaspedidos_SelectionChanged" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="300" DataContext="{Binding Source=LineaPedidoProveedor}">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Producto" Width="*" Binding="{Binding Path=VarianteProducto.Producto.Nombre}"/>
+                                                    <DataGridTextColumn Header="Variante" Width="*" Binding="{Binding Path=VarianteProducto.Nombre}"/>
+                                                    <DataGridTextColumn Header="Cantidad" Width="*" Binding="{Binding Path=Cantidad}"/>
+                                                    <DataGridTextColumn Header="Proveedor" Width="*" Binding="{Binding Path=VarianteProducto.Producto.Proveedor.Nombre}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </GroupBox>
+                                    </StackPanel>
+                                    <materialDesign:Card Grid.Column="1" HorizontalContentAlignment="left" VerticalAlignment="Stretch">
+                                        <StackPanel>
+                                            <StackPanel>
+                                                <WrapPanel Orientation="Horizontal" Margin="5">
+                                                    <TextBox x:Name="txt_PedidoBuscarProd" materialDesign:HintAssist.Hint="Busca un producto" Margin="5"/>
+                                                    <Button x:Name="btn_PedidoBuscarProd" ToolTip="Busca un producto" Height="30" Width="30" Margin="5" Padding="0" Click="btn_PedidoBuscarProd_Click">
+                                                        <Button.Content>
+                                                            <materialDesign:PackIcon Kind="Magnify" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                </WrapPanel>
+                                                <WrapPanel Orientation="Horizontal" Margin="20">
+                                                    <Label Content="Ver stock inferior a: " Margin="5"></Label>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <xctk:IntegerUpDown x:Name="numericUpDownStock" materialDesign:HintAssist.Hint="Cantidad" Text="0" Maximum="10000" Margin="5" Height="30" Width="60" Minimum="0" materialDesign:HintAssist.IsFloating="True"></xctk:IntegerUpDown>
+                                                        <Button x:Name="btn_PedidoBuscarProdporStock" ToolTip="Filtra productos por stock" Height="30" Width="30" Margin="5" Padding="0" Click="btn_PedidoBuscarProdporStock_Click">
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Filter" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </WrapPanel>
+                                                <Separator Margin="10"></Separator>
+                                                <TextBox x:Name="txt_PedidoNombreProducto" materialDesign:HintAssist.Hint="Nombre Producto" IsReadOnly="True"  materialDesign:HintAssist.IsFloating="True"  Margin="10"></TextBox>
+                                                <TextBox x:Name="txt_PedidoNombreVariante"  Margin="5"  materialDesign:HintAssist.Hint="Nombre de Variante" IsReadOnly="True" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                                <WrapPanel Orientation="Horizontal" Margin="5">
+                                                    <Label Content="Cantidad a pedir: "/>
+                                                    <xctk:IntegerUpDown x:Name="numericUpDownPedido" materialDesign:HintAssist.Hint="Cantidad" Width="100" Maximum="1000" Minimum="1" Text="1" materialDesign:HintAssist.IsFloating="True"></xctk:IntegerUpDown>
+                                                </WrapPanel>
+                                                <TextBox x:Name="txt_PedidoComentarios"  Margin="5" TextWrapping="Wrap" AcceptsReturn="True" Height="50"  materialDesign:HintAssist.Hint="Comentarios" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                                            </StackPanel>
+
+                                                <WrapPanel Orientation="Horizontal" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10" Width="auto" HorizontalAlignment="Stretch">
+                                                    <Button x:Name="btn_addLineaPedido" Margin="5" Padding="0" Click="btn_addLineaPedido_Click" HorizontalAlignment="Stretch" Height="50">
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Añadir al carrito" FontSize="10" Margin="5" Foreground="White"></TextBlock>
+                                                                <materialDesign:PackIcon Kind="Cart" Padding="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                <TextBlock x:Name="txt_NumArticulosCarrito" Text="( 0 )" Foreground="White" Margin="5" FontSize="12" FontWeight="Bold"></TextBlock>
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button x:Name="btn_deleteLineaPedido" Margin="5" Padding="0" Click="btn_deleteLineaPedido_Click" HorizontalAlignment="Stretch" Height="50">
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Retirar del carrito" FontSize="10" Margin="5" Foreground="White"></TextBlock>
+                                                                <materialDesign:PackIcon Kind="CartOff" Padding="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button x:Name="btn_RealizarPedido" Margin="5" Padding="0" Click="btn_RealizarPedido_Click" HorizontalAlignment="Stretch" Height="50">
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Confirmar Pedido" FontSize="10" Margin="5" Foreground="White"></TextBlock>
+                                                                <materialDesign:PackIcon Kind="FilePdf" Padding="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </WrapPanel>
+
+                                        </StackPanel>
+                                    </materialDesign:Card>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Pedidos Realizados" x:Name="tab_PedidosRealizados">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="8*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <GroupBox Header="Lista de pedidos" Margin="5" Grid.Column="0">
+                                        <DataGrid x:Name="datagridpedidosRealizados" IsReadOnly="True" SelectionChanged="datagridpedidosRealizados_SelectionChanged" ToolTip="Doble clic para abrir el pdf" MouseDoubleClick="datagridpedidosRealizados_MouseDoubleClick" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="300" DataContext="{Binding Source=PedidoProveedor}">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Numero de pedido" Width="*" Binding="{Binding Path=PedidoProveedorId}"/>
+                                                <DataGridTextColumn Header="Fecha" Width="*" Binding="{Binding Path=FechaPedido}"/>
+                                                <DataGridTextColumn Header="Proveedor" Width="*" Binding="{Binding Path=Proveedor.Nombre}"/>
+                                                <DataGridTemplateColumn Header="Pedido Recibido" IsReadOnly="True">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <CheckBox IsHitTestVisible="False" HorizontalAlignment="Center" HorizontalContentAlignment="Center" IsChecked="{Binding Recibido, Mode=OneWay}"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </GroupBox>
+                                    <materialDesign:Card Grid.Column="1">
+                                        <StackPanel>
+                                            <Label Content="Confirma recepeción " HorizontalAlignment="Center" Margin="20"/>
+                                            <Button x:Name="btn_PedidoconfirmarRecepcion" Margin="5" Padding="0" Click="btn_PedidoconfirmarRecepcion_Click" HorizontalAlignment="Stretch" Height="50">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Confirmar Recepción Pedido" HorizontalAlignment="Center" FontSize="10" Margin="5" Foreground="White"></TextBlock>
+                                                        <materialDesign:PackIcon Kind="TicketConfirmation" Padding="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+                                            <Separator Margin="20"></Separator>
+                                            <Button x:Name="btn_PedidosVerTodos" Margin="10" Padding="0" Click="btn_PedidosVerTodos_Click" HorizontalAlignment="Stretch" Height="50">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Ver todos los pedidos" HorizontalAlignment="Center" FontSize="10" Margin="5" Foreground="White"></TextBlock>
+                                                        <materialDesign:PackIcon Kind="FilterVariant" Padding="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button x:Name="btn_PedidosVerSinConfirmar" Margin="10" Padding="0" Click="btn_PedidosVerSinConfirmar_Click" HorizontalAlignment="Stretch" Height="50">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Pedidos por confirmar" HorizontalAlignment="Center" FontSize="10" Margin="5" Foreground="White"></TextBlock>
+                                                        <materialDesign:PackIcon Kind="FilterRemove" Padding="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+                                        </StackPanel>
+                                    </materialDesign:Card>
+                                </Grid>
+                            </TabItem>
+                        </dragablz:TabablzControl>
+                    </Grid>
+                </Grid>
+            </TabItem>
+     
+        </dragablz:TabablzControl>
+    </Grid>
+</Window>

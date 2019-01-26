@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoTPV", "ProyectoTPV\ProyectoTPV.csproj", "{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
+		TPV|Any CPU = TPV|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.CD_ROM|Any CPU.ActiveCfg = TPV|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.CD_ROM|Any CPU.Build.0 = TPV|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.SingleImage|Any CPU.ActiveCfg = TPV|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.SingleImage|Any CPU.Build.0 = TPV|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.TPV|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB04EC3-B90F-46B5-BC61-EC65EE7F2AFA}.TPV|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
