@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace ProyectoTPV.Model
 {
     [Table("PedidoProveedores")]
+    [AddINotifyPropertyChangedInterface]
     public class PedidoProveedor : PropertyValidateModel
     {
         public PedidoProveedor()

@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+﻿using System.Data.Entity;
+using MySql.Data.EntityFramework;
 
 namespace ProyectoTPV.Model
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class TpvEntities : DbContext
     {
 
-        public TpvEntities()
-                 : base("TpvEntities")
-        { }
+        public TpvEntities() : base("rabbitPOS")
+        {
+            Database.SetInitializer<DbContext>(new CreateDatabaseIfNotExists<DbContext>());
+        }
 
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<LineaVenta> LineaVenta { get; set; }
@@ -30,7 +27,7 @@ namespace ProyectoTPV.Model
         public DbSet<SubCategoria> SubCategoria { get; set; }
         public DbSet<VarianteProducto> VarianteProducto { get; set; }
 
-
+   
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

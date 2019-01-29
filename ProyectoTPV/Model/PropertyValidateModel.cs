@@ -1,14 +1,12 @@
-﻿using System;
+﻿using PropertyChanged;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProyectoTPV.Model
 {
-    [PropertyChanged.ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public abstract class PropertyValidateModel : IDataErrorInfo
     {
         // check for general model error

@@ -7,12 +7,12 @@ using System.Windows;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("TPV OSP")]
+[assembly: AssemblyTitle("Rabbit POS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Oscar Suarez Company")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TPV OSP")]
-[assembly: AssemblyCopyright("Copyright ©  2017 Ósar Suárez")]
+[assembly: AssemblyCopyright("Copyright ©  2017 - 2019 Ósar Suárez")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

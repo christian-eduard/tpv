@@ -1,13 +1,11 @@
-﻿using System;
+﻿using PropertyChanged;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProyectoTPV.Model
 {
     [Table("Proveedores")]
+    [AddINotifyPropertyChangedInterface]
     public class Proveedor
     {
         public Proveedor()

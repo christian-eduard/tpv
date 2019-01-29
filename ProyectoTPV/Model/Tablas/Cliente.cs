@@ -32,7 +32,7 @@ namespace ProyectoTPV.Model
         [StringLength(255, MinimumLength = 0)]
         public string Telefono { get; set; }
 
-        [StringLength(255, MinimumLength = 0)]
+        [RegularExpression(@"(^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$)?", ErrorMessage = "Introduce un correo válido")]
         public string Email { get; set; }
 
         //Propiedad de navegacion

@@ -1,18 +1,7 @@
-﻿using BespokeFusion;
-using ProyectoTPV.Model;
+﻿using ProyectoTPV.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using AmRoMessageDialog;
 
 namespace ProyectoTPV
 {
@@ -112,21 +101,25 @@ namespace ProyectoTPV
             c.FechaHoraApertura = DateTime.Now;
             c.DineroFinal = cantidadInit;
             c.Vendedor = usr;
-          //  c.FechaHoraRecuento = DateTime.Now;
+          // c.FechaHoraRecuento = DateTime.Now;
             u.CajaRepository.Create(c);
-            var msg = new CustomMaterialMessageBox
+
+            string message = "Hola " + usr.Nombre + Environment.NewLine + "Caja inicial " + cantidadInit + " €";
+            string caption = "Acceso al TPV";
+
+            var messageBox = new AmRoMessageBox
             {
-                TxtMessage = { Text = "Hola " + usr.Nombre + Environment.NewLine + "Caja inicial " + cantidadInit + " €", Foreground = Brushes.Black, FontSize = 40, HorizontalAlignment = HorizontalAlignment.Center },
-                TxtTitle = { Text = "Inicio de caja", Foreground = Brushes.White },
-                MainContentControl = { Background = Brushes.White },
-                BtnCopyMessage = { Visibility = Visibility.Hidden },
-                BorderBrush = { Opacity = 0 },
-                BtnCancel = { Visibility = Visibility.Hidden },
-                BtnOk = { Content = "Acceso al TPV", HorizontalAlignment = HorizontalAlignment.Center, Foreground = Brushes.White, Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#795548")), Width = 200 },
-                TitleBackgroundPanel = { Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#795548")) },
+                Background = "#333333",
+                TextColor = "#ffffff",
+                IconColor = "#3399ff",
+                RippleEffectColor = "#000000",
+                ClickEffectColor = "#1F2023",
+                ShowMessageWithEffect = true,
+                EffectArea = this,
+                ParentWindow = this
             };
 
-            msg.Show();
+            messageBox.Show(message, caption, AmRoMessageBoxButton.Ok);
             this.Close();
         }
 

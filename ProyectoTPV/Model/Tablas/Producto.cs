@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ProyectoTPV.Model
 {
     [Table("Productos")]
-    [PropertyChanged.ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class Producto : PropertyValidateModel
     {
         public Producto()

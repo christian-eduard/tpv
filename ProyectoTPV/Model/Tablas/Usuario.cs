@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ProyectoTPV.Model
 {
     [Table("Usuarios")]
-    [PropertyChanged.ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class Usuario : PropertyValidateModel
     {
         public Usuario()
@@ -43,6 +43,7 @@ namespace ProyectoTPV.Model
         [RegularExpression(@"(^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$)?",ErrorMessage ="Introduce un correo válido")]
         public string Email { get; set; }
 
+        [StringLength(255, MinimumLength = 0)]
         public string RutaImagen { get; set; }
 
         //PROPIEDADES DE NAVEGACION

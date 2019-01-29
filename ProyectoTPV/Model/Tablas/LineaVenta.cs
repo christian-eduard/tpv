@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using PropertyChanged;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace ProyectoTPV.Model
 {
     [Table("LineaVentas")]
-    [PropertyChanged.ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class LineaVenta : PropertyValidateModel
     {
         public int LineaVentaId { get; set; }
