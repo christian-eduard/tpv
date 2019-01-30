@@ -4,10 +4,10 @@ using MySql.Data.EntityFramework;
 namespace ProyectoTPV.Model
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-    public class TpvEntities : DbContext
+    public class PosEntities : DbContext
     {
 
-        public TpvEntities() : base("rabbitPOS")
+        public PosEntities() : base("rabbitPOS")
         {
             Database.SetInitializer<DbContext>(new CreateDatabaseIfNotExists<DbContext>());
         }

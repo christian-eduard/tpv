@@ -8,7 +8,7 @@ namespace ProyectoTPV.Model
 {
     public class TicketVentaRepository : GenericRepository<TicketVenta>
     {
-        public TicketVentaRepository(TpvEntities context) : base(context)
+        public TicketVentaRepository(PosEntities context) : base(context)
         {
         }
     }

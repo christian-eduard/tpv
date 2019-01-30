@@ -7,7 +7,7 @@ namespace ProyectoTPV.Model
 {
     public class UnitOfWork : IDisposable
     {
-        private TpvEntities context = new TpvEntities();
+        private PosEntities context = new PosEntities();
         private bool disposed = false;
 
 

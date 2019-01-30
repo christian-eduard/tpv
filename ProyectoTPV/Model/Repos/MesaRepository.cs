@@ -8,7 +8,7 @@ namespace ProyectoTPV.Model
 {
     public class MesaRepository : GenericRepository<Mesa>
     {
-        public MesaRepository(TpvEntities context) : base(context)
+        public MesaRepository(PosEntities context) : base(context)
         {
         }
     }

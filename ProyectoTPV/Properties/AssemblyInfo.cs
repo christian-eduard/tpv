@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TPV OSP")]
+[assembly: AssemblyProduct("Rabbit POS")]
 [assembly: AssemblyCopyright("Copyright ©  2017 - 2019 Ósar Suárez")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

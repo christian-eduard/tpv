@@ -8,7 +8,7 @@ namespace ProyectoTPV.Model
 {
     public class SubCategoriaRepository : GenericRepository<SubCategoria>
     {
-        public SubCategoriaRepository(TpvEntities context) : base(context)
+        public SubCategoriaRepository(PosEntities context) : base(context)
         {
 
         }

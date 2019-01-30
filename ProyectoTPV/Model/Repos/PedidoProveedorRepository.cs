@@ -8,7 +8,7 @@ namespace ProyectoTPV.Model
 {
     public class PedidoProveedorRepository:GenericRepository<PedidoProveedor>
     {
-        public PedidoProveedorRepository(TpvEntities context) : base(context)
+        public PedidoProveedorRepository(PosEntities context) : base(context)
         {
         }
     }

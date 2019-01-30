@@ -9,7 +9,7 @@ namespace ProyectoTPV.Model
 {
     public class CategoriaRepository : GenericRepository<Categoria>
     {
-        public CategoriaRepository(TpvEntities context) : base(context)
+        public CategoriaRepository(PosEntities context) : base(context)
         {
 
         }

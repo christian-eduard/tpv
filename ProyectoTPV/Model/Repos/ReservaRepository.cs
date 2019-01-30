@@ -8,7 +8,7 @@ namespace ProyectoTPV.Model
 {
     public class ReservaRepository : GenericRepository<Reserva>
     {
-        public ReservaRepository(TpvEntities context) : base(context)
+        public ReservaRepository(PosEntities context) : base(context)
         {
         }
     }

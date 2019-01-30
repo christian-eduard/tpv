@@ -8,7 +8,7 @@ namespace ProyectoTPV.Model
 {
    public class CajaRepository : GenericRepository<Caja>
     {
-        public CajaRepository(TpvEntities context) : base(context)
+        public CajaRepository(PosEntities context) : base(context)
         {
         }
     }

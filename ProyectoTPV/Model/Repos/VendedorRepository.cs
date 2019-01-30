@@ -8,7 +8,7 @@ namespace ProyectoTPV.Model
 {
     public class VendedorRepository : GenericRepository<Usuario>
     {
-        public VendedorRepository(TpvEntities context) : base(context)
+        public VendedorRepository(PosEntities context) : base(context)
         {
         }
     }

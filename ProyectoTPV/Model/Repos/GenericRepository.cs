@@ -14,9 +14,9 @@ namespace ProyectoTPV.Model
     public class GenericRepository<TEntity> where TEntity : class
     {
         //Repositorio generico que permite el acceso generico a cualquier tabla
-        protected TpvEntities context;
+        protected PosEntities context;
         DbSet<TEntity> dbSet;
-        public GenericRepository(TpvEntities context)
+        public GenericRepository(PosEntities context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

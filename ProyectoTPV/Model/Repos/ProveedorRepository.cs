@@ -8,7 +8,7 @@ namespace ProyectoTPV.Model
 {
     public class ProveedorRepository : GenericRepository<Proveedor>
     {
-        public ProveedorRepository(TpvEntities context) : base(context)
+        public ProveedorRepository(PosEntities context) : base(context)
         {
         }
     }
