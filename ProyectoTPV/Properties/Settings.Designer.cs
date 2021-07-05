@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProyectoTPV.Properties
+namespace OpenPOS.Properties
 {
 
 

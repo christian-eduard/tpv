@@ -1,37 +1,33 @@
 ﻿using PropertyChanged;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProyectoTPV.Model
+namespace OpenPOS.Model
 {
     [AddINotifyPropertyChangedInterface]
-    public class Categoria : PropertyValidateModel
+    public class Group : PropertyValidateModel
     {
-        public Categoria()
+        public Group()
         {
-            Producto = new HashSet<Producto>();
+            Item = new HashSet<Item>();
         }
 
-        public int CategoriaId { get; set; }
+        public int GroupId { get; set; }
 
         [Required(ErrorMessage = "Nombre obligatorio")]
         [StringLength(100, MinimumLength = 2)]
         [Index(IsUnique = true)]
-        public string Nombre { get; set; }
+        public string Name { get; set; }
 
         [StringLength(100, MinimumLength = 0)]
-        public string Descripcion { get; set; }
+        public string Description { get; set; }
 
         [StringLength(100, MinimumLength = 0)]
-        public string RutaImagen { get; set; }
+        public string ImagePath { get; set; }
 
         //PROPIEDADES DE NAVEGACION
 
-        public virtual ICollection<Producto> Producto { get; set; }
+        public virtual ICollection<Item> Item { get; set; }
     }
 }

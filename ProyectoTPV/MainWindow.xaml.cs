@@ -1,4 +1,4 @@
-﻿using ProyectoTPV.Model;
+﻿using OpenPOS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using AmRoMessageDialog;
 
-namespace ProyectoTPV
+namespace OpenPOS
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
@@ -79,12 +79,12 @@ namespace ProyectoTPV
 
         #region Declaraciones Global
         UnitOfWork u = new UnitOfWork();
-        LineaVenta lv;
-        TicketVenta tv;
-        Producto prod = new Producto();
-        Usuario ActiveUsr;
-        Usuario usr = new Usuario();
-        Categoria cat = new Categoria();
+        SalesLine lv;
+        Invoice tv;
+        Item prod = new Item();
+        User ActiveUsr;
+        User usr = new User();
+        Group cat = new Group();
         string idUsuario;
         string unidades = null;
         decimal total = 0;
@@ -104,7 +104,7 @@ namespace ProyectoTPV
 
         void Select_usuario(string usuario)
         {
-            ActiveUsr = new Usuario();
+            ActiveUsr = new User();
             PasswordBox.Clear();
 
             string[] usrContent = usuario.Split(' ');
@@ -117,12 +117,12 @@ namespace ProyectoTPV
         {
             StackPanel_Usuarios.Children.Clear();
 
-            foreach (Usuario item in u.UsuarioRepository.GetAll())
+            foreach (User item in u.UserRepository.GetAll())
             {
                 //cargar usuarios en pantalla de login
                 MaterialDesignThemes.Wpf.Chip chip = new MaterialDesignThemes.Wpf.Chip();
 
-                string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\usuarios\\" + item.RutaImagen;
+                string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\usuarios\\" + item.ImagePath;
                 if (File.Exists(rutaImagen))
                 {
                     chip.IconForeground = Brushes.Transparent;
@@ -130,7 +130,7 @@ namespace ProyectoTPV
                     chip.IconBackground = new ImageBrush(new BitmapImage(new Uri(rutaImagen, UriKind.Relative)));
                 }
                 chip.FontSize = 20;
-                chip.Content = item.UsuarioId + " " + item.Nombre + " " + item.Apellidos;
+                chip.Content = item.UserId + " " + item.Name + " " + item.LastName;
                 Thickness margin = chip.Margin;
                 margin.Top = 10;
                 margin.Bottom = 10;
@@ -154,7 +154,7 @@ namespace ProyectoTPV
         {
             StackPanel_Categorias.Children.Clear();
 
-            foreach (Categoria item in u.CategoriaRepository.GetAll())
+            foreach (Group item in u.GroupRepository.GetAll())
             {
                 Button b = new Button();
                 StackPanel sp = new StackPanel();
@@ -162,7 +162,7 @@ namespace ProyectoTPV
                 TextBlock tb = new TextBlock();
 
                 #region formato botton
-                string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\categorias\\" + item.RutaImagen;
+                string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\categorias\\" + item.ImagePath;
                 if (File.Exists(rutaImagen))
                 {
                     b.Background = new ImageBrush(new BitmapImage(new Uri(rutaImagen, UriKind.Relative)));
@@ -170,7 +170,7 @@ namespace ProyectoTPV
                 b.Foreground = Brushes.Black;
                 b.FontSize = 25;
                 b.FontWeight = FontWeights.Light;
-                b.Content = item.Nombre;
+                b.Content = item.Name;
                 b.VerticalContentAlignment = VerticalAlignment.Bottom;
                 b.HorizontalContentAlignment = HorizontalAlignment.Center;
                 Thickness margin = b.Margin;
@@ -200,12 +200,12 @@ namespace ProyectoTPV
 
             try
             {
-                foreach (var item in u.ProductoRepository.Get().Where(c => c.Categoria.Nombre.Equals(categoria)))
+                foreach (var item in u.ItemRepository.Get().Where(c => c.Group.Name.Equals(categoria)))
                 {
                     Button b = new Button();
 
                     #region formato boton
-                    string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\productos\\" + item.RutaImagen;
+                    string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\productos\\" + item.ImagePath;
 
                     if (File.Exists(rutaImagen))
                     {
@@ -215,7 +215,7 @@ namespace ProyectoTPV
                     b.Foreground = Brushes.Black;
                     b.FontSize = 25;
                     b.FontWeight = FontWeights.Light;
-                    b.Content = item.Nombre;
+                    b.Content = item.Name;
                     Thickness margin = b.Margin;
                     b.ToolTip = b.Content;
                     b.VerticalContentAlignment = VerticalAlignment.Bottom;
@@ -247,20 +247,20 @@ namespace ProyectoTPV
 
         void Load_LineaVenta(string NombreProducto)
         {
-            lv = new LineaVenta();
-            lv.Producto = u.ProductoRepository.Get().FirstOrDefault(c => c.Nombre.Equals(NombreProducto));
+            lv = new SalesLine();
+            lv.Item = u.ItemRepository.Get().FirstOrDefault(c => c.Name.Equals(NombreProducto));
 
             if (unidades != null)
             {
-                lv.Unidades = Convert.ToInt32(unidades);
+                lv.Unit = Convert.ToInt32(unidades);
             }
             else
             {
                 unidades = 1.ToString();
-                lv.Unidades = Convert.ToInt32(unidades);
+                lv.Unit = Convert.ToInt32(unidades);
             }
-            tv.LineaVenta.Add(lv);
-            total += u.ProductoRepository.Get().FirstOrDefault(c => c.Nombre.Equals(NombreProducto)).Precio * lv.Unidades;
+            tv.SalesLine.Add(lv);
+            total += u.ItemRepository.Get().FirstOrDefault(c => c.Name.Equals(NombreProducto)).Price * lv.Unit;
             txtblock_Total.Text = total.ToString();
             unidades = 1.ToString();
             txtblock_unidades.Text = unidades.ToString();
@@ -270,13 +270,13 @@ namespace ProyectoTPV
 
         void New_Ticket()
         {
-            if (tv.LineaVenta.Count > 0)
+            if (tv.SalesLine.Count > 0)
             {
-                tv.LineaVenta.ToList().ForEach(i => i.Producto.Stock -= i.Unidades);
-                tv.Usuario = ActiveUsr;
-                tv.FechaHora = DateTime.Now;
-                u.TicketVentaRepository.Create(tv);
-                ticket ventanaTicket = new ticket(tv);
+                tv.SalesLine.ToList().ForEach(i => i.Item.Stock -= i.Unit);
+                tv.User = ActiveUsr;
+                tv.Timestamp = DateTime.Now;
+                u.InvoiceRepository.Create(tv);
+                invoice ventanaTicket = new invoice(tv);
                 resetCaja();
                 string rutaImagen = Environment.CurrentDirectory + "/imagenes/ticketBackground.jpg";
                 ventanaTicket.Background = new ImageBrush(new BitmapImage(new Uri(rutaImagen, UriKind.Relative)));
@@ -290,7 +290,7 @@ namespace ProyectoTPV
 
         private void resetCaja()
         {
-            tv = new TicketVenta();
+            tv = new Invoice();
             txt_precioProducto.Text = 0.ToString();
             total = 0;
             txtblock_unidades.Text = 1.ToString();
@@ -324,9 +324,9 @@ namespace ProyectoTPV
                 grid_adminNO.Visibility = Visibility.Hidden;
                 grid_adminSI.Visibility = Visibility.Visible;
 
-                datagridCategorias.ItemsSource = u.CategoriaRepository.GetAll();
-                datagridProducto.ItemsSource = u.ProductoRepository.GetAll();
-                datagridUsuarios.ItemsSource = u.UsuarioRepository.GetAll();
+                datagridCategorias.ItemsSource = u.GroupRepository.GetAll();
+                datagridProducto.ItemsSource = u.ItemRepository.GetAll();
+                datagridUsuarios.ItemsSource = u.UserRepository.GetAll();
 
                 cargarcomboboxImagenes();
 
@@ -362,15 +362,15 @@ namespace ProyectoTPV
         {
             //logear usuario
             Console.WriteLine("Pin: " + PasswordBox.Password);
-            bool valida = u.UsuarioRepository.GetAll().Any(c => c.UsuarioId.ToString().Equals(idUsuario) && c.Pin.Equals(PasswordBox.Password));
+            bool valida = u.UserRepository.GetAll().Any(c => c.UserId.ToString().Equals(idUsuario) && c.Pin.Equals(PasswordBox.Password));
             if (valida)
             {
-                ActiveUsr = u.UsuarioRepository.Get().SingleOrDefault(c => c.UsuarioId.ToString().Equals(idUsuario));
-                habilitarPaneles(ActiveUsr.TipoUsuario);
+                ActiveUsr = u.UserRepository.Get().SingleOrDefault(c => c.UserId.ToString().Equals(idUsuario));
+                habilitarPaneles(ActiveUsr.UserType);
                 tab_tpv.IsSelected = true;
                 resetCaja();
-                chip_usuarioVenta.Content = ActiveUsr.Nombre + " " + ActiveUsr.Apellidos;
-                string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\usuarios\\" + ActiveUsr.RutaImagen;
+                chip_usuarioVenta.Content = ActiveUsr.Name + " " + ActiveUsr.LastName;
+                string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\usuarios\\" + ActiveUsr.ImagePath;
                 if (File.Exists(rutaImagen))
                 {
                     chip_usuarioVenta.IconForeground = Brushes.Transparent;
@@ -391,13 +391,13 @@ namespace ProyectoTPV
         {
             if (datagridLineaVenta.SelectedIndex > -1)
             {
-                tv.LineaVenta.Remove((LineaVenta)datagridLineaVenta.SelectedItem);
+                tv.SalesLine.Remove((SalesLine)datagridLineaVenta.SelectedItem);
             }
             else
             {
                 try
                 {
-                    tv.LineaVenta.Remove(tv.LineaVenta.Last());
+                    tv.SalesLine.Remove(tv.SalesLine.Last());
                 }
                 catch (Exception er)
                 {
@@ -431,11 +431,11 @@ namespace ProyectoTPV
         private void RefrescarDatagridLineaVenta()
         {
             datagridLineaVenta.ItemsSource = null;
-            datagridLineaVenta.ItemsSource = tv.LineaVenta.Reverse().ToList();
+            datagridLineaVenta.ItemsSource = tv.SalesLine.Reverse().ToList();
 
-            if (tv.LineaVenta.Count > 0)
+            if (tv.SalesLine.Count > 0)
             {
-                total = tv.LineaVenta.Sum(c => c.Producto.Precio * c.Unidades);
+                total = tv.SalesLine.Sum(c => c.Item.Price * c.Unit);
             }
             else
             {
@@ -530,13 +530,13 @@ namespace ProyectoTPV
         public void refreshDatagrids()
         {
             datagridCategorias.ItemsSource = null;
-            datagridCategorias.ItemsSource = u.CategoriaRepository.GetAll();
+            datagridCategorias.ItemsSource = u.GroupRepository.GetAll();
 
             datagridProducto.ItemsSource = null;
-            datagridProducto.ItemsSource = u.ProductoRepository.GetAll();
+            datagridProducto.ItemsSource = u.ItemRepository.GetAll();
 
             datagridUsuarios.ItemsSource = null;
-            datagridUsuarios.ItemsSource = u.UsuarioRepository.GetAll();
+            datagridUsuarios.ItemsSource = u.UserRepository.GetAll();
         }
 
         private void changeDataContext()
@@ -701,9 +701,9 @@ namespace ProyectoTPV
             }
             try
             {
-                cat.Nombre = txtboxNombreCategoria.Text;
-                cat.Descripcion = txtboxDescripcionCategoria.Text;
-                cat.RutaImagen = imagen;
+                cat.Name = txtboxNombreCategoria.Text;
+                cat.Description = txtboxDescripcionCategoria.Text;
+                cat.ImagePath = imagen;
             }
             catch (Exception)
             {
@@ -713,9 +713,9 @@ namespace ProyectoTPV
             {
                 if (create)
                 {
-                    if (!u.CategoriaRepository.GetAll().Any(c => c.Nombre.Equals(cat.Nombre)))
+                    if (!u.GroupRepository.GetAll().Any(c => c.Name.Equals(cat.Name)))
                     {
-                        u.CategoriaRepository.Create(cat);
+                        u.GroupRepository.Create(cat);
 
                         AmRoMessageBox.ShowDialog("Guardado correctamente");
                         deshabilitarCamposCategorias();
@@ -732,7 +732,7 @@ namespace ProyectoTPV
                 }
                 else
                 {
-                    u.CategoriaRepository.Update(cat);
+                    u.GroupRepository.Update(cat);
 
                     AmRoMessageBox.ShowDialog("Guardado correctamente");
                     deshabilitarCamposCategorias();
@@ -752,9 +752,9 @@ namespace ProyectoTPV
                 {
                     try
                     {
-                        string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\categorias\\" + cat.RutaImagen;
+                        string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\categorias\\" + cat.ImagePath;
 
-                        u.CategoriaRepository.Delete(cat);
+                        u.GroupRepository.Delete(cat);
                         refreshDatagrids();
                         Load_Categorias();
                         refreshComboBoxCategorias();
@@ -779,11 +779,11 @@ namespace ProyectoTPV
             if (datagridCategorias.SelectedIndex > -1)
             {
                 create = false;
-                cat = (Categoria)datagridCategorias.SelectedItem;
-                txtboxDescripcionCategoria.Text = cat.Descripcion;
-                txtboxNombreCategoria.Text = cat.Nombre;
-                combobox_imagenesCategorias.Text = cat.RutaImagen;
-                string rutaDestino = Environment.CurrentDirectory + "\\imagenes\\categorias\\" + cat.RutaImagen;
+                cat = (Group)datagridCategorias.SelectedItem;
+                txtboxDescripcionCategoria.Text = cat.Description;
+                txtboxNombreCategoria.Text = cat.Name;
+                combobox_imagenesCategorias.Text = cat.ImagePath;
+                string rutaDestino = Environment.CurrentDirectory + "\\imagenes\\categorias\\" + cat.ImagePath;
                 try
                 {
                     BitmapImage logo = new BitmapImage();
@@ -804,7 +804,7 @@ namespace ProyectoTPV
         private void btn_nuevaCategoria_Click(object sender, RoutedEventArgs e)
         {
             create = true;
-            cat = new Categoria();
+            cat = new Group();
             habilitarCamposCategorias();
             btn_borrarCategoria.IsEnabled = false;
             borrarCamposCategorias();
@@ -833,7 +833,7 @@ namespace ProyectoTPV
         public void refreshComboBoxCategorias()
         {
             comboBox_CategoriasProducto.ItemsSource = null;
-            comboBox_CategoriasProducto.ItemsSource = u.CategoriaRepository.GetAll();
+            comboBox_CategoriasProducto.ItemsSource = u.GroupRepository.GetAll();
             comboBox_CategoriasProducto.SelectedValuePath = "CategoriaId";
             comboBox_CategoriasProducto.DisplayMemberPath = "Nombre";
         }
@@ -933,16 +933,16 @@ namespace ProyectoTPV
                 int iva = 0;
                 decimal price = 0;
                 int stock = 0;
-                prod.Nombre = txt_nombreProducto.Text;
-                prod.Descripcion = txt_descripcionProducto.Text;
-                prod.RutaImagen = imagen;
+                prod.Name = txt_nombreProducto.Text;
+                prod.Description = txt_descripcionProducto.Text;
+                prod.ImagePath = imagen;
                 Int32.TryParse(comboboxIVA.Text, out iva);
                 Decimal.TryParse(txt_precioProducto.Text.Replace('.', ','), out price);
                 Int32.TryParse(txt_StockInicial.Text, out stock);
-                prod.Iva = iva;
-                prod.Precio = price;
+                prod.Tax = iva;
+                prod.Price = price;
                 prod.Stock = stock;
-                prod.Categoria = (Categoria)comboBox_CategoriasProducto.SelectedItem;
+                prod.Group = (Group)comboBox_CategoriasProducto.SelectedItem;
             }
             catch (Exception er) { Console.WriteLine(er); }
 
@@ -951,9 +951,9 @@ namespace ProyectoTPV
 
                 if (create)
                 {
-                    if (!u.ProductoRepository.GetAll().Any(c => c.Nombre.Equals(prod.Nombre)))
+                    if (!u.ItemRepository.GetAll().Any(c => c.Name.Equals(prod.Name)))
                     {
-                        u.ProductoRepository.Create(prod);
+                        u.ItemRepository.Create(prod);
                         AmRoMessageBox.ShowDialog("Guardado correctamente");
                         deshabilitarCamposProductos();
                         limiparCamposProductos();
@@ -968,7 +968,7 @@ namespace ProyectoTPV
                 }
                 else
                 {
-                    u.ProductoRepository.Update(prod);
+                    u.ItemRepository.Update(prod);
                     AmRoMessageBox.ShowDialog("Guardado correctamente");
                     deshabilitarCamposProductos();
                     limiparCamposProductos();
@@ -987,8 +987,8 @@ namespace ProyectoTPV
                 {
                     try
                     {
-                        string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\productos\\" + prod.RutaImagen;
-                        u.ProductoRepository.Delete(prod);
+                        string rutaImagen = Environment.CurrentDirectory + "\\imagenes\\productos\\" + prod.ImagePath;
+                        u.ItemRepository.Delete(prod);
                         refreshDatagrids();
                         Load_Categorias();
                     }
@@ -1008,7 +1008,7 @@ namespace ProyectoTPV
         private void btn_nuevoProducto_Click(object sender, RoutedEventArgs e)
         {
             create = true;
-            prod = new Producto();
+            prod = new Item();
             habilitarCamposProductos();
             btn_borrarProducto.IsEnabled = false;
             limiparCamposProductos();
@@ -1021,24 +1021,24 @@ namespace ProyectoTPV
             if (datagridProducto.SelectedIndex > -1)
             {
                 create = false;
-                prod = (Producto)datagridProducto.SelectedItem;
-                txt_descripcionProducto.Text = prod.Descripcion;
-                txt_nombreProducto.Text = prod.Nombre;
-                txt_precioProducto.Text = prod.Precio.ToString();
+                prod = (Item)datagridProducto.SelectedItem;
+                txt_descripcionProducto.Text = prod.Description;
+                txt_nombreProducto.Text = prod.Name;
+                txt_precioProducto.Text = prod.Price.ToString();
                 txt_StockInicial.Text = prod.Stock.ToString();
-                comboBoxImagenProductos.Text = prod.RutaImagen;
-                comboboxIVA.Text = prod.Iva.ToString();
-                imagen = prod.RutaImagen;
+                comboBoxImagenProductos.Text = prod.ImagePath;
+                comboboxIVA.Text = prod.Tax.ToString();
+                imagen = prod.ImagePath;
                 try
                 {
-                    comboBox_CategoriasProducto.Text = prod.Categoria.Nombre;
+                    comboBox_CategoriasProducto.Text = prod.Group.Name;
                 }
                 catch (Exception er)
                 {
                     Console.WriteLine(er);
                     comboBox_CategoriasProducto.Text = "";
                 }
-                string rutaDestino = Environment.CurrentDirectory + "\\imagenes\\productos\\" + prod.RutaImagen;
+                string rutaDestino = Environment.CurrentDirectory + "\\imagenes\\productos\\" + prod.ImagePath;
                 try
                 {
                     BitmapImage logo = new BitmapImage();
@@ -1164,13 +1164,13 @@ namespace ProyectoTPV
 
             try
             {
-                usr.Nombre = txt_nombreUsuario.Text;
-                usr.Apellidos = txt_apellidosUsuario.Text;
-                usr.RutaImagen = imagen;
+                usr.Name = txt_nombreUsuario.Text;
+                usr.LastName = txt_apellidosUsuario.Text;
+                usr.ImagePath = imagen;
                 usr.Login = txt_loginUsuario.Text;
                 usr.Pin = txt_pinUsuario.Text;
                 usr.Email = txt_emailUsuario.Text;
-                usr.TipoUsuario = comboBox_TipoUsuario.Text;
+                usr.UserType = comboBox_TipoUsuario.Text;
             }
             catch (Exception er) { Console.WriteLine(er); }
 
@@ -1179,9 +1179,9 @@ namespace ProyectoTPV
 
                 if (create)
                 {
-                    if (!u.UsuarioRepository.GetAll().Any(c => c.Login.Equals(usr.Login)))
+                    if (!u.UserRepository.GetAll().Any(c => c.Login.Equals(usr.Login)))
                     {
-                        u.UsuarioRepository.Create(usr);
+                        u.UserRepository.Create(usr);
                         AmRoMessageBox.ShowDialog("Guardado correctamente");
                         deshabilitarCamposUsuario();
                         limpiarCamposUsuario();
@@ -1195,7 +1195,7 @@ namespace ProyectoTPV
                 }
                 else
                 {
-                    u.UsuarioRepository.Update(usr);
+                    u.UserRepository.Update(usr);
                     AmRoMessageBox.ShowDialog("Guardado correctamente");
                     deshabilitarCamposUsuario();
                     limpiarCamposUsuario();
@@ -1209,13 +1209,13 @@ namespace ProyectoTPV
         {
             if (datagridUsuarios.SelectedItem != null)
             {
-                if ((Usuario)datagridUsuarios.SelectedItem != ActiveUsr)
+                if ((User)datagridUsuarios.SelectedItem != ActiveUsr)
                 {
                     if (MsgPregunta("¿Seguro que quieres eliminar este usuario?", "Eliminar"))
                     {
                         try
                         {
-                            u.UsuarioRepository.Delete(usr);
+                            u.UserRepository.Delete(usr);
                             refreshDatagrids();
                             Load_Usuarios();
                             limpiarCamposUsuario();
@@ -1238,7 +1238,7 @@ namespace ProyectoTPV
         private void btn_nuevoUsuario_Click(object sender, RoutedEventArgs e)
         {
             create = true;
-            usr = new Usuario();
+            usr = new User();
             habilitarCamposUsuario();
             btn_borrarUsuario.IsEnabled = false;
             limpiarCamposUsuario();
@@ -1294,14 +1294,14 @@ namespace ProyectoTPV
             if (datagridUsuarios.SelectedIndex > -1)
             {
                 create = false;
-                usr = (Usuario)datagridUsuarios.SelectedItem;
-                txt_nombreUsuario.Text = usr.Nombre;
-                txt_apellidosUsuario.Text = usr.Apellidos;
+                usr = (User)datagridUsuarios.SelectedItem;
+                txt_nombreUsuario.Text = usr.Name;
+                txt_apellidosUsuario.Text = usr.LastName;
                 txt_loginUsuario.Text = usr.Login;
                 txt_pinUsuario.Text = usr.Pin;
-                comboboxImagenUsuario.Text = usr.RutaImagen;
-                comboBox_TipoUsuario.Text = usr.TipoUsuario;
-                imagen = usr.RutaImagen;
+                comboboxImagenUsuario.Text = usr.ImagePath;
+                comboBox_TipoUsuario.Text = usr.UserType;
+                imagen = usr.ImagePath;
                 try
                 {
                     txt_emailUsuario.Text = usr.Email;
@@ -1312,7 +1312,7 @@ namespace ProyectoTPV
                     txt_emailUsuario.Text = "";
                 }
 
-                string rutaDestino = Environment.CurrentDirectory + "\\imagenes\\usuarios\\" + usr.RutaImagen;
+                string rutaDestino = Environment.CurrentDirectory + "\\imagenes\\usuarios\\" + usr.ImagePath;
                 try
                 {
                     BitmapImage logo = new BitmapImage();

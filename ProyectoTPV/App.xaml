@@ -1,7 +1,7 @@
-﻿<Application x:Class="ProyectoTPV.App"
+﻿<Application x:Class="OpenPOS.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ProyectoTPV"
+             xmlns:local="clr-namespace:OpenPOS"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              StartupUri="MainWindow.xaml">
     <Application.Resources>

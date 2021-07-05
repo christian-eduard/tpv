@@ -1,29 +1,24 @@
 ﻿using PropertyChanged;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProyectoTPV.Model
+namespace OpenPOS.Model
 {
-    [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public class Producto : PropertyValidateModel
+    [AddINotifyPropertyChangedInterface]
+    public class Item : PropertyValidateModel
     {
-        public Producto()
+        public Item()
         {
-            LineaVenta = new HashSet<LineaVenta>();
+            SalesLine = new HashSet<SalesLine>();
         }
 
-        public int ProductoId { get; set; }
+        public int ItemId { get; set; }
 
 
         [Required(ErrorMessage = "Nombre obligatorio")]
         [StringLength(100, MinimumLength = 2)]
         [Index(IsUnique = true)]
-        public string Nombre { get; set; }
+        public string Name { get; set; }
 
 
         [Required(ErrorMessage = "Introduce un stock inicial")]
@@ -32,22 +27,22 @@ namespace ProyectoTPV.Model
 
         [Required]
         [RegularExpression(@"^\d+(,\d{1,2})?$",ErrorMessage ="Formato del precio incorrecto")]
-        public decimal Precio { get; set; }
+        public decimal Price { get; set; }
 
 
-        public int Iva { get; set; }
-
-        [StringLength(100, MinimumLength = 0)]
-        public string Descripcion { get; set; }
+        public int Tax { get; set; }
 
         [StringLength(100, MinimumLength = 0)]
-        public string RutaImagen { get; set; }
+        public string Description { get; set; }
+
+        [StringLength(100, MinimumLength = 0)]
+        public string ImagePath { get; set; }
 
 
         //PROPIEDADES DE NAVEGACION
         [Required (ErrorMessage ="Elige una categoría")]
-        public virtual Categoria Categoria { get; set; }
+        public virtual Group Group { get; set; }
 
-        public virtual ICollection<LineaVenta> LineaVenta { get; set; }
+        public virtual ICollection<SalesLine> SalesLine { get; set; }
     }
 }

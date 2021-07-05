@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Linq.Expressions;
 using System.Data.Entity.Validation;
 
-namespace ProyectoTPV.Model
+namespace OpenPOS.Model
 {
     public class GenericRepository<TEntity> where TEntity : class
     {
         //Repositorio generico que permite el acceso generico a cualquier tabla
-        protected TpvEntities context;
+        protected OpenPOSEntities context;
         DbSet<TEntity> dbSet;
-        public GenericRepository(TpvEntities context)
+        public GenericRepository(OpenPOSEntities context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();
@@ -76,7 +74,7 @@ namespace ProyectoTPV.Model
 
         public List<TEntity> GetAll()
         {
-            return (List<TEntity>)context.Set<TEntity>().ToList();
+            return context.Set<TEntity>().ToList();
 
         }
         public List<TEntity> Get(

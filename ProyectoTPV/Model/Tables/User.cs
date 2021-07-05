@@ -1,30 +1,26 @@
 ﻿using PropertyChanged;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProyectoTPV.Model
+namespace OpenPOS.Model
 {
     [AddINotifyPropertyChangedInterface]
-    public class Usuario : PropertyValidateModel
+    public class User : PropertyValidateModel
     {
-        public Usuario()
+        public User()
         {
-            TicketVenta = new HashSet<TicketVenta>();
+            SalesLine = new HashSet<Invoice>();
         }
 
-        public int UsuarioId { get; set; }
+        public int UserId { get; set; }
 
         [Required(ErrorMessage = "Nombre obligatorio")]
         [StringLength(40, MinimumLength = 2)]
-        public string Nombre { get; set; }
+        public string Name { get; set; }
 
         [StringLength(40, MinimumLength = 0)]
-        public string Apellidos { get; set; }
+        public string LastName { get; set; }
 
 
         [Required(ErrorMessage = "Login obligatorio")]
@@ -40,18 +36,18 @@ namespace ProyectoTPV.Model
         [Required(ErrorMessage = "tipo de usuario obligatorio")]
         [RegularExpression("usuario|admin")]
         [StringLength(100, MinimumLength = 2)]
-        public string TipoUsuario { get; set; }
+        public string UserType { get; set; }
 
         [RegularExpression(@"(^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$)?",ErrorMessage ="Introduce un correo válido")]
         [StringLength(100, MinimumLength = 2)]
         public string Email { get; set; }
 
         [StringLength(100, MinimumLength = 2)]
-        public string RutaImagen { get; set; }
+        public string ImagePath { get; set; }
 
         //PROPIEDADES DE NAVEGACION
 
-        public virtual ICollection<TicketVenta> TicketVenta { get; set; }
+        public virtual ICollection<Invoice> SalesLine { get; set; }
     }
 }
 
